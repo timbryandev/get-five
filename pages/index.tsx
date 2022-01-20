@@ -8,10 +8,11 @@ import Description from '../components/description'
 import Form from '../components/form'
 import GameOver from '../components/gameOver'
 import Guesses from '../components/guesses'
-import answers from './answers.json'
+// @ts-expect-error no type definitions for third-party library :/
+import randomWords from '@genzou/random-words'
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const answer = answers[Math.floor(Math.random() * answers.length)]
+  const answer = randomWords({exactly:1, maxLength: 5, minLength: 5 })[0]
 
   return { props: { answer } }
 }
