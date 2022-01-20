@@ -1,5 +1,5 @@
 {
-  "name": "get_five",
+  "name": "get-five",
   "private": true,
   "scripts": {
     "dev": "next dev",
