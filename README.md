@@ -1,5 +1,7 @@
 # get_five
 
+Clone of Wordle, with no restrictions as my wife loves this game and hates waiting for the next round.
+
 ## prerequisites
 
 - node@14
@@ -24,3 +26,7 @@ npm run lint  # lint files
 npm run build # build production assets
 npm run start # run production server
 ```
+
+## credits
+
+Base game from [https://alexkates.hashnode.dev](https://alexkates.hashnode.dev/how-i-built-a-wordle-clone-using-nextjs-tailwindcss-and-typescript)
