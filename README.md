@@ -1,6 +1,17 @@
-# get_five
+# get-five
 
 Clone of Wordle, with no restrictions as my wife loves this game and hates waiting for the next round.
+
+Can currently be played over at https://get-five-timbryandev.vercel.app/
+
+Things I'd like it to do that the original doesn't:
+
+- [x] No daily play limit - use an API to give us as many random words as we like
+- [ ] Add timer for current game
+- [ ] Save best time and display as "Record:"
+- [ ] Increase/decrease difficulty by increasing/decreasing word length
+- [ ] Map difficulty against best times and display respective time to current difficulty
+- [ ] More fun, mobile-optimised styling
 
 ## prerequisites
 
