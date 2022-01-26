@@ -42,15 +42,28 @@ const Keyboard = ({
     }
   }
 
+  const getColour = (letter: string) => {
+    switch (letter) {
+      case DELETE_LEFT_SYMBOL:
+        return 'text-yellow-500'
+      case CARRIAGE_RETURN_SYMBOL:
+        return 'text-green-500 font-bold'
+      default:
+        return ''
+    }
+  }
+
   return (
-    <div className='keyboard'>
+    <div className='keyboard text-center m-2 text-2xl'>
       {rows.map((row, idx) => (
-        <div key={`keyboard__row-${idx}`} className='keyboard__row'>
+        <div key={`keyboard__row-${idx}`} className='keyboard__row flex'>
           {row.map(letter => (
             <KeyboardKey
               key={letter}
               letter={letter}
               action={getAction(letter)}
+              colour={getColour(letter)}
+              disabled={false}
             />
           ))}
         </div>

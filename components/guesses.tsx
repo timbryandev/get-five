@@ -12,19 +12,19 @@ const getLetterBackgroundColor = (
     return "bg-green-300";
   }
 
-  const countOfLetterOccuringInAnswer = answer
+  const countOfLetterOccurringInAnswer = answer
     .split("")
     .filter((letter: string) => letter === guess[index]).length;
 
-  const countOfLetterOccuringInGuessBeforeCurrentIndex = guess
+  const countOfLetterOccurringInGuessBeforeCurrentIndex = guess
     .slice(0, index)
     .split("")
     .filter((letter: string) => letter === guess[index]).length;
 
   if (
     answer.includes(guess[index]) &&
-    countOfLetterOccuringInAnswer >
-      countOfLetterOccuringInGuessBeforeCurrentIndex
+    countOfLetterOccurringInAnswer >
+      countOfLetterOccurringInGuessBeforeCurrentIndex
   ) {
     return "bg-yellow-300";
   }

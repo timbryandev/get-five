@@ -45,7 +45,7 @@ const Home: NextPage = ({
   }
 
   return (
-    <div className='grid place-items-center'>
+    <div className='max-w-screen-sm m-auto grid place-items-center'>
       <Description />
       <Guesses guesses={guesses} answer={answer} />
       <Form guesses={guesses} setGuesses={setGuesses} />

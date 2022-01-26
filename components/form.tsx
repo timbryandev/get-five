@@ -30,10 +30,13 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      className='w-full text-center ml-auto mr-auto '
+      onSubmit={handleSubmit}
+    >
       <input
         ref={inputRef}
-        className='text-center border-2 border-gray-400 p-2 m-2 text-3xl'
+        className='text-center border-2 border-gray-400 p-2 m-2 text-3xl rounded'
         type='text'
         onChange={evt => onGuessChange(evt.target.value)}
         onKeyUp={evt => {
@@ -44,6 +47,7 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
         placeholder='Enter your guess'
         required
       />
+
       <Keyboard
         onDeleteKey={() => onGuessChange(getInputValue().slice(0, -1))}
         onEnterKey={() => handleSubmit(null)}
