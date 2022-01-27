@@ -10,15 +10,15 @@ const Description: React.FC = () => {
         <li>You have 5 guesses.</li>
         <li>
           If a letter is in the correct location, it will be{' '}
-          <span className='text-green-500 font-bold'>green</span>
+          <span className='bg-green-300 font-bold p-1'>green</span>
         </li>
         <li>
           If a letter is in the word but in the wrong location, it will be{' '}
-          <span className='text-yellow-500 font-bold'>yellow</span>
+          <span className='bg-yellow-300 font-bold p-1'>yellow</span>
         </li>
         <li>
           If a letter is not in the word, it will be{' '}
-          <span className='text-gray-500 font-bold'>gray</span>
+          <span className='bg-gray-300 font-bold p-1'>gray</span>
         </li>
       </ul>
     </div>

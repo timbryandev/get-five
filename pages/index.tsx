@@ -1,7 +1,7 @@
 import type {
   NextPage,
   GetServerSideProps,
-  InferGetServerSidePropsType
+  InferGetServerSidePropsType,
 } from 'next'
 import { useEffect, useState } from 'react'
 import { Letter, useGuessContext } from '../contexts/guessContext'
@@ -20,16 +20,21 @@ export const getServerSideProps: GetServerSideProps = async () => {
 }
 
 const Home: NextPage = ({
-  answer
+  answer,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { state, dispatch } = useGuessContext()
   const [guesses, setGuesses] = useState<string[]>([])
 
+  const isWinner = guesses.length > 0 && guesses[guesses.length - 1] === answer
+  const isLoser = guesses.length >= 6 && guesses[guesses.length - 1] !== answer
+
+  // reset game
   useEffect(() => {
     setGuesses([])
     dispatch({ type: 'RESET_LETTERS' })
   }, [answer, dispatch])
 
+  // add a guess
   useEffect(() => {
     const lastGuess = guesses.at(-1) || ''
     const letterStatuses: Letter = {}
@@ -41,29 +46,23 @@ const Home: NextPage = ({
     dispatch({ type: 'SET_LETTER', payload: letterStatuses })
   }, [answer, dispatch, guesses])
 
-  const isWinner = guesses.length > 0 && guesses[guesses.length - 1] === answer
-  if (isWinner) {
-    return (
-      <GameOver guesses={guesses} answer={answer}>
-        You win!
-      </GameOver>
-    )
-  }
-
-  const isLoser = guesses.length >= 6 && guesses[guesses.length - 1] !== answer
-  if (isLoser) {
-    return (
-      <GameOver guesses={guesses} answer={answer}>
-        You Lose!
-      </GameOver>
-    )
-  }
-
   return (
     <div className='max-w-screen-sm m-auto grid place-items-center'>
       <Description />
-      <Guesses guesses={guesses} answer={answer} />
-      <Form guesses={guesses} setGuesses={setGuesses} />
+      {isWinner ? (
+        <GameOver guesses={guesses} answer={answer}>
+          <span className='text-green-500'>You win!</span>
+        </GameOver>
+      ) : isLoser ? (
+        <GameOver guesses={guesses} answer={answer}>
+          <span className='text-green-500'>You lose!</span>
+        </GameOver>
+      ) : (
+        <>
+          <Guesses guesses={guesses} answer={answer} />
+          <Form guesses={guesses} setGuesses={setGuesses} />
+        </>
+      )}
     </div>
   )
 }
