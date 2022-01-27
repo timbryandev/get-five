@@ -2,7 +2,7 @@ const KeyboardKey = ({
   action,
   colour,
   disabled,
-  letter,
+  letter
 }: {
   action: (letter: string) => void
   colour: string

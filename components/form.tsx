@@ -14,7 +14,6 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
   const getInputValue = () => inputRef.current?.value ?? ''
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement> | null) => {
-    console.log('submit')
     event?.preventDefault()
 
     if (guess.length !== 5) {

@@ -1,50 +1,20 @@
+import getLetterStatus from '../utils/getLetterStatus'
+
 export interface GuessesProps {
-  guesses: string[];
-  answer: string;
-}
-
-const getLetterBackgroundColor = (
-  guess: string,
-  index: number,
+  guesses: string[]
   answer: string
-): string => {
-  if (answer[index] === guess[index]) {
-    return "bg-green-300";
-  }
-
-  const countOfLetterOccurringInAnswer = answer
-    .split("")
-    .filter((letter: string) => letter === guess[index]).length;
-
-  const countOfLetterOccurringInGuessBeforeCurrentIndex = guess
-    .slice(0, index)
-    .split("")
-    .filter((letter: string) => letter === guess[index]).length;
-
-  if (
-    answer.includes(guess[index]) &&
-    countOfLetterOccurringInAnswer >
-      countOfLetterOccurringInGuessBeforeCurrentIndex
-  ) {
-    return "bg-yellow-300";
-  }
-
-  return "bg-gray-300";
-};
-
+}
 const Guesses: React.FC<GuessesProps> = ({ guesses, answer }) => {
   return (
-    <ol className="m-4">
+    <ol className='m-4'>
       {guesses.map((guess, guessIndex) => (
-        <li key={guessIndex} className="grid grid-cols-5">
-          {guess.split("").map((letter, letterIndex) => (
+        <li key={guessIndex} className='grid grid-cols-5'>
+          {guess.split('').map((letter, letterIndex) => (
             <span
               key={letterIndex}
-              className={`${getLetterBackgroundColor(
-                guess,
-                letterIndex,
-                answer
-              )} h-12 w-12 text-2xl flex border-2 border-gray-300 p-1 m-1 box-border justify-center items-center`}
+              className={`${
+                getLetterStatus(guess, letterIndex, answer).color
+              } h-12 w-12 text-2xl flex border-2 border-gray-300 p-1 m-1 box-border justify-center items-center`}
             >
               {letter}
             </span>
@@ -52,7 +22,7 @@ const Guesses: React.FC<GuessesProps> = ({ guesses, answer }) => {
         </li>
       ))}
     </ol>
-  );
-};
+  )
+}
 
-export default Guesses;
+export default Guesses
