@@ -1,4 +1,3 @@
-import React from 'react'
 import KeyboardKey from './keyboard-key'
 import { useGuessContext } from '../../contexts/guessContext'
 

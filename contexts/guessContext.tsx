@@ -36,14 +36,13 @@ function guessReducer (state: State, action: Action) {
       }
     case 'RESET_LETTERS':
       return {
-        ...state,
-        letters: {}
+        ...defaultState
       }
   }
 }
 
 export function GuessProvider ({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(guessReducer, defaultState)
+  const [state, dispatch] = useReducer(guessReducer, { ...defaultState })
 
   return (
     <GuessContext.Provider value={{ state, dispatch }}>
@@ -55,7 +54,9 @@ export function GuessProvider ({ children }: { children: ReactNode }) {
 export function useGuessContext () {
   const context = useContext(GuessContext)
 
-  if (context == null) { throw new Error('useGuessContext must be used inside a GuessProvider') }
+  if (context == null) {
+    throw new Error('useGuessContext must be used inside a GuessProvider')
+  }
 
   return context
 }
