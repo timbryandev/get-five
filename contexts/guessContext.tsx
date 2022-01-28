@@ -27,12 +27,29 @@ const GuessContext = createContext<
 { state: State, dispatch: Dispatch } | undefined
 >(undefined)
 
+function combineLetters (oldLetters: Letter, newLetters: Letter): Letter {
+  const combined = Object.entries(newLetters).reduce(
+    (acc, [key, val]) => {
+      const existingEntry = acc[key]
+      if (existingEntry !== undefined) {
+        if (existingEntry.status === 'correct' || val.status === 'incorrect') {
+          return acc
+        }
+      }
+      return { ...acc, [key]: val }
+    },
+    { ...oldLetters }
+  )
+
+  return combined
+}
+
 function guessReducer (state: State, action: Action): DefaultState {
   switch (action.type) {
     case 'SET_LETTER':
       return {
         ...state,
-        letters: { ...state.letters, ...action.payload }
+        letters: { ...combineLetters(state.letters, action.payload) }
       }
     case 'RESET_LETTERS':
       return {
