@@ -15,14 +15,14 @@ export const getAnswer = (): string => {
 }
 
 const Home: NextPage = () => {
-  const { state, dispatch } = useGuessContext()
+  const { dispatch } = useGuessContext()
   const [guesses, setGuesses] = useState<string[]>([])
   const [answer, setAnswer] = useState<string>(getAnswer())
 
   const isWinner = guesses.length > 0 && guesses[guesses.length - 1] === answer
   const isLoser = guesses.length >= 5 && guesses[guesses.length - 1] !== answer
 
-  const resetGame = () => {
+  const resetGame = (): void => {
     setAnswer(getAnswer())
     setGuesses([])
     dispatch({ type: 'RESET_LETTERS' })
@@ -30,7 +30,7 @@ const Home: NextPage = () => {
 
   // add a guess
   useEffect(() => {
-    const lastGuess = guesses.at(-1) || ''
+    const lastGuess = guesses.at(-1) ?? ''
     const letterStatuses: Letter = {}
 
     lastGuess.split('').forEach((letter: string, idx: number) => {

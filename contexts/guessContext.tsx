@@ -27,7 +27,7 @@ const GuessContext = createContext<
 { state: State, dispatch: Dispatch } | undefined
 >(undefined)
 
-function guessReducer (state: State, action: Action) {
+function guessReducer (state: State, action: Action): DefaultState {
   switch (action.type) {
     case 'SET_LETTER':
       return {
@@ -41,7 +41,11 @@ function guessReducer (state: State, action: Action) {
   }
 }
 
-export function GuessProvider ({ children }: { children: ReactNode }) {
+export function GuessProvider ({
+  children
+}: {
+  children: ReactNode
+}): JSX.Element {
   const [state, dispatch] = useReducer(guessReducer, { ...defaultState })
 
   return (
@@ -51,7 +55,9 @@ export function GuessProvider ({ children }: { children: ReactNode }) {
   )
 }
 
-export function useGuessContext () {
+export function useGuessContext ():
+| Error
+| { state: DefaultState, dispatch: Dispatch } {
   const context = useContext(GuessContext)
 
   if (context == null) {

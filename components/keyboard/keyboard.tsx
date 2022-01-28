@@ -33,7 +33,7 @@ const Keyboard = ({
 }: IKeyboardProps): JSX.Element => {
   const { state } = useGuessContext()
 
-  const getAction = (letter: string) => {
+  const getAction = (letter: string): (letter: string) => void => {
     switch (letter) {
       case DELETE_LEFT_SYMBOL:
         return onDeleteKey
@@ -44,7 +44,7 @@ const Keyboard = ({
     }
   }
 
-  const getColour = (letter: string) => {
+  const getColour = (letter: string): string => {
     switch (letter) {
       case DELETE_LEFT_SYMBOL:
         return 'text-yellow-500'

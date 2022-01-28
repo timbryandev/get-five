@@ -11,9 +11,9 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [guess, setGuess] = useState<string>('')
 
-  const getInputValue = () => inputRef.current?.value ?? ''
+  const getInputValue = (): string => inputRef.current?.value ?? ''
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement> | null) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement> | null): void => {
     event?.preventDefault()
 
     if (guess.length !== 5) {
@@ -24,7 +24,7 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
     setGuess('')
   }
 
-  const onGuessChange = (letter: string) => {
+  const onGuessChange = (letter: string): void => {
     setGuess(cleanse(letter))
   }
 
