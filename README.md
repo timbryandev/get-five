@@ -1,6 +1,6 @@
 # get-five
 
-Clone of Wordle, with no restrictions as my wife loves this game and hates waiting for the next round.
+Guess the 5 letter word with a mastermind codebreaking style game play with no play restrictions - my wife loves the game this is based on but hates having to wait for the next word to be released.
 
 Can currently be played over at https://get-five-timbryandev.vercel.app/
 
@@ -27,8 +27,8 @@ npm install
 ## dev
 
 ```bash
-npm run dev   # start dev env
-npm run lint  # lint files
+npm run dev   # start local development environment
+npm run lint  # lint TypeScript and JavaScript files
 ```
 
 ## deploy
