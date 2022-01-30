@@ -72,9 +72,7 @@ export function GuessProvider ({
   )
 }
 
-export function useGuessContext ():
-| Error
-| { state: DefaultState, dispatch: Dispatch } {
+export function useGuessContext (): { state: DefaultState, dispatch: Dispatch } {
   const context = useContext(GuessContext)
 
   if (context == null) {
