@@ -1,6 +1,7 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Keyboard from './keyboard/keyboard'
 import cleanse from '../utils/cleansGuessString'
+import doesDeviceSupportTouchInput from '../utils/doesDeviceSupportTouchInput'
 
 export interface FormProps {
   guesses: string[]
@@ -13,7 +14,9 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
 
   const getInputValue = (): string => inputRef.current?.value ?? ''
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement> | null): void => {
+  const handleSubmit = (
+    event: React.FormEvent<HTMLFormElement> | null
+  ): void => {
     event?.preventDefault()
 
     if (guess.length !== 5) {
@@ -27,6 +30,13 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
   const onGuessChange = (letter: string): void => {
     setGuess(cleanse(letter))
   }
+
+  useEffect(() => {
+    // disable virtual keyboard on touchscreen devices - only use ours on mobile
+    if (doesDeviceSupportTouchInput()) {
+      inputRef.current?.setAttribute('readonly', 'true')
+    }
+  }, [])
 
   return (
     <form
