@@ -5,7 +5,7 @@ import '../styles/globals.css'
 function MyApp ({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <GuessProvider>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </GuessProvider>
   )
 }
