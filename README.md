@@ -23,6 +23,8 @@ Things I'd like it to do:
 ## installation
 
 ```bash
+git clone https://github.com/timbryandev/get-five.git
+cd get-five
 npm install
 ```
 
