@@ -5,6 +5,7 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "ts-standard --fix",
+    "prepare": "husky install",
     "start": "next start"
   },
   "dependencies": {
@@ -19,6 +20,7 @@
     "autoprefixer": "^10.4.2",
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.8",
+    "husky": "^7.0.4",
     "postcss": "^8.4.5",
     "tailwindcss": "^3.0.15",
     "ts-standard": "^11.0.0",
