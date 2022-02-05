@@ -34,7 +34,7 @@ function modalReducer (state: State, action: Action): DefaultState {
 export function ModalProvider ({
   children
 }: {
-  children: ReactNode
+  children: React.ReactNode
 }): JSX.Element {
   const [state, dispatch] = useReducer(modalReducer, { ...defaultState })
 
