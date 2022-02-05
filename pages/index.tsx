@@ -61,7 +61,7 @@ const Home: NextPage = () => {
           : isLoser
             ? (
               <GameOver guesses={guesses} answer={answer} onContinue={resetGame}>
-                <span className='text-green-500'>You lose!</span>
+                <span className='text-red-500'>You lose!</span>
               </GameOver>
               )
             : (
