@@ -1,7 +1,7 @@
 import Anchor from '../anchor'
 
 export interface NavItemProps {
-  children: ReactNode
+  children: React.ReactNode
   href?: string
   onClick?: () => void
   type: 'button' | 'link' | undefined
@@ -26,7 +26,7 @@ function NavItem ({ children, href = '/', onClick, type }: NavItemProps): JSX.El
     return (
       <Anchor
         href={href}
-        className={baseClass}
+        customClasses={baseClass}
       >
         {children}
       </Anchor>

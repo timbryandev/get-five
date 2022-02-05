@@ -6,6 +6,9 @@ export interface AnchorProps {
   title?: string
 }
 
+export const ANCHOR_CLASSES =
+  'underline text-blue-600 hover:text-blue-800 visited:text-purple-600 break-all'
+
 const Anchor = ({
   additionalClassNames = '',
   children,
@@ -21,7 +24,7 @@ const Anchor = ({
     className={
       customClasses !== ''
         ? customClasses
-        : `underline text-blue-600 hover:text-blue-800 visited:text-purple-600 break-all ${additionalClassNames}`
+        : `${ANCHOR_CLASSES} ${additionalClassNames}`
     }
   >
     {children}
