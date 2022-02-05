@@ -32,7 +32,7 @@ const Home: NextPage = () => {
 
   // add a guess
   useEffect(() => {
-    const lastGuess = guesses.at(-1) ?? ''
+    const lastGuess = [...guesses].pop() ?? ''
     const letterStatuses: Letter = {}
 
     lastGuess.split('').forEach((letter: string, idx: number) => {
@@ -43,7 +43,7 @@ const Home: NextPage = () => {
   }, [answer, dispatch, guesses])
 
   return (
-    <div className="wrapper w-screen h-screen bg-teal-100">
+    <div className='wrapper w-screen h-screen bg-teal-100'>
       <div className='max-w-screen-sm m-auto grid place-items-center'>
         <button
           className='absolute top-1 right-1 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded'
