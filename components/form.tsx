@@ -40,12 +40,12 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
 
   return (
     <form
-      className='w-full text-center ml-auto mr-auto '
+      className='w-full text-center p-2 ml-auto mr-auto '
       onSubmit={handleSubmit}
     >
       <input
         ref={inputRef}
-        className='text-center border-2 border-gray-400 p-2 m-2 text-3xl rounded'
+        className='w-full text-center border-2 border-gray-400 p-2 text-3xl rounded'
         type='text'
         onChange={evt => onGuessChange(evt.target.value)}
         onKeyUp={evt => {

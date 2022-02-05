@@ -43,33 +43,35 @@ const Home: NextPage = () => {
   }, [answer, dispatch, guesses])
 
   return (
-    <div className='max-w-screen-sm m-auto grid place-items-center'>
-      <button
-        className='absolute top-0 right-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-        onClick={() => setShowAbout(true)}
-      >
-        About
-      </button>
-      <Description />
-      {isWinner
-        ? (
-          <GameOver guesses={guesses} answer={answer} onContinue={resetGame}>
-            <span className='text-green-500'>You win!</span>
-          </GameOver>
-          )
-        : isLoser
+    <div className="wrapper w-screen h-screen bg-teal-100">
+      <div className='max-w-screen-sm m-auto grid place-items-center'>
+        <button
+          className='absolute top-1 right-1 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded'
+          onClick={() => setShowAbout(true)}
+        >
+          About
+        </button>
+        <Description />
+        {isWinner
           ? (
             <GameOver guesses={guesses} answer={answer} onContinue={resetGame}>
-              <span className='text-green-500'>You lose!</span>
+              <span className='text-green-500'>You win!</span>
             </GameOver>
             )
-          : (
-            <>
-              <Guesses guesses={guesses} answer={answer} />
-              <Form guesses={guesses} setGuesses={setGuesses} />
-            </>
-            )}
-      {showAbout === true && <AboutModal onClose={() => setShowAbout(false)} />}
+          : isLoser
+            ? (
+              <GameOver guesses={guesses} answer={answer} onContinue={resetGame}>
+                <span className='text-green-500'>You lose!</span>
+              </GameOver>
+              )
+            : (
+              <>
+                <Guesses guesses={guesses} answer={answer} />
+                <Form guesses={guesses} setGuesses={setGuesses} />
+              </>
+              )}
+        {showAbout === true && <AboutModal onClose={() => setShowAbout(false)} />}
+      </div>
     </div>
   )
 }

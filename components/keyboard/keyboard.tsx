@@ -56,7 +56,7 @@ const Keyboard = ({
   }
 
   return (
-    <div className='keyboard text-center m-2 text-2xl'>
+    <div className='keyboard text-center mt-2 text-2xl'>
       {rows.map((row, idx) => (
         <div key={`keyboard__row-${idx}`} className='keyboard__row flex'>
           {row.map((letter: string) => {
