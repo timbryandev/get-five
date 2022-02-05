@@ -1,11 +1,14 @@
 import type { AppProps } from 'next/app'
 import { GuessProvider } from '../contexts/guessContext'
+import { ModalProvider } from '../contexts/modalContext'
 import '../styles/globals.css'
 
 function MyApp ({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <GuessProvider>
-      <Component {...pageProps} />
+      <ModalProvider>
+        <Component {...pageProps} />
+      </ModalProvider>
     </GuessProvider>
   )
 }

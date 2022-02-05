@@ -2,11 +2,13 @@ import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
 import { Letter, useGuessContext } from '../contexts/guessContext'
 import getLetterStatus from '../utils/getLetterStatus'
+import ModalManager from '../components/modals/modal-manager'
 import Description from '../components/description'
-import AboutModal from '../components/about-modal'
 import Form from '../components/form'
 import GameOver from '../components/gameOver'
 import Guesses from '../components/guesses'
+import Header from '../components/header/header'
+
 // @ts-expect-error no type definitions for third-party library :/
 import randomWords from '@genzou/random-words'
 
@@ -17,7 +19,6 @@ export const getAnswer = (): string => {
 
 const Home: NextPage = () => {
   const { dispatch } = useGuessContext()
-  const [showAbout, setShowAbout] = useState<Boolean>(false)
   const [guesses, setGuesses] = useState<string[]>([])
   const [answer, setAnswer] = useState<string>(getAnswer())
 
@@ -43,14 +44,9 @@ const Home: NextPage = () => {
   }, [answer, dispatch, guesses])
 
   return (
-    <div className='wrapper w-screen h-screen bg-teal-100'>
+    <div className='wrapper w-screen h-screen overflow-auto bg-teal-100'>
+      <Header />
       <div className='max-w-screen-sm m-auto grid place-items-center'>
-        <button
-          className='absolute top-1 right-1 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded'
-          onClick={() => setShowAbout(true)}
-        >
-          About
-        </button>
         <Description />
         {isWinner
           ? (
@@ -70,7 +66,7 @@ const Home: NextPage = () => {
                 <Form guesses={guesses} setGuesses={setGuesses} />
               </>
               )}
-        {showAbout === true && <AboutModal onClose={() => setShowAbout(false)} />}
+        <ModalManager />
       </div>
     </div>
   )
