@@ -60,7 +60,7 @@ function guessReducer (state: State, action: Action): DefaultState {
 export function GuessProvider ({
   children
 }: {
-  children: ReactNode
+  children: React.ReactNode
 }): JSX.Element {
   const [state, dispatch] = useReducer(guessReducer, { ...defaultState })
 
