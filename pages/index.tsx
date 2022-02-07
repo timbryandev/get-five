@@ -8,6 +8,7 @@ import Form from '../components/form'
 import GameOver from '../components/gameOver'
 import Guesses from '../components/guesses'
 import Header from '../components/header/header'
+import { GUESS_LIMIT } from '../config/consts'
 
 // @ts-expect-error no type definitions for third-party library :/
 import randomWords from '@genzou/random-words'
@@ -23,7 +24,7 @@ const Home: NextPage = () => {
   const [answer, setAnswer] = useState<string>(getAnswer())
 
   const isWinner = guesses.length > 0 && guesses[guesses.length - 1] === answer
-  const isLoser = guesses.length >= 5 && guesses[guesses.length - 1] !== answer
+  const isLoser = guesses.length >= GUESS_LIMIT && guesses[guesses.length - 1] !== answer
 
   const resetGame = (): void => {
     setAnswer(getAnswer())
