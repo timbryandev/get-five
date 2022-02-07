@@ -24,7 +24,8 @@ const Home: NextPage = () => {
   const [answer, setAnswer] = useState<string>(getAnswer())
 
   const isWinner = guesses.length > 0 && guesses[guesses.length - 1] === answer
-  const isLoser = guesses.length >= GUESS_LIMIT && guesses[guesses.length - 1] !== answer
+  const isLoser =
+    guesses.length >= GUESS_LIMIT && guesses[guesses.length - 1] !== answer
 
   const resetGame = (): void => {
     setAnswer(getAnswer())
@@ -38,7 +39,15 @@ const Home: NextPage = () => {
     const letterStatuses: Letter = {}
 
     lastGuess.split('').forEach((letter: string, idx: number) => {
-      letterStatuses[letter] = getLetterStatus(lastGuess, idx, answer)
+      const previousStatus = letterStatuses[letter]
+      const currentStatus = getLetterStatus(lastGuess, idx, answer)
+      if (
+        typeof previousStatus !== 'undefined' &&
+        previousStatus.weighting >= currentStatus.weighting
+      ) {
+        return
+      }
+      letterStatuses[letter] = currentStatus
     })
 
     dispatch({ type: 'SET_LETTER', payload: letterStatuses })

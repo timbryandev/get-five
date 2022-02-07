@@ -1,5 +1,6 @@
 import KeyboardKey from './keyboard-key'
 import { useGuessContext } from '../../contexts/guessContext'
+import { STATUS_INCORRECT } from '../../config/consts'
 
 interface IKeyboardProps {
   onDeleteKey: () => void
@@ -33,7 +34,7 @@ const Keyboard = ({
 }: IKeyboardProps): JSX.Element => {
   const { state } = useGuessContext()
 
-  const getAction = (letter: string): (letter: string) => void => {
+  const getAction = (letter: string): ((letter: string) => void) => {
     switch (letter) {
       case DELETE_LEFT_SYMBOL:
         return onDeleteKey
@@ -61,7 +62,7 @@ const Keyboard = ({
         <div key={`keyboard__row-${idx}`} className='keyboard__row flex'>
           {row.map((letter: string) => {
             const isDisabled =
-              state.letters[letter.toLowerCase()]?.status === 'incorrect'
+              state.letters[letter.toLowerCase()]?.status === STATUS_INCORRECT
             return (
               <KeyboardKey
                 key={letter}
