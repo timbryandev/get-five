@@ -1,13 +1,15 @@
 import { useMemo, useState } from 'react'
 import getLetterStatus from '../utils/getLetterStatus'
-import { GUESS_LIMIT } from '../config/consts'
+import { GameState } from '../pages/index'
+import { GUESS_LIMIT, GAME_STATE_INPROGRESS } from '../config/consts'
 
 export interface GuessesProps {
-  guesses: string[]
   answer: string
+  guesses: string[]
+  gameState: GameState
 }
 
-const Guesses: React.FC<GuessesProps> = ({ guesses, answer }) => {
+const Guesses: React.FC<GuessesProps> = ({ answer, guesses, gameState }) => {
   const [revealFirstLetter, setRevealFirstLetter] = useState(false)
 
   const guessesWithFiller = useMemo(() => {
@@ -23,17 +25,25 @@ const Guesses: React.FC<GuessesProps> = ({ guesses, answer }) => {
     return items
   }, [answer, guesses, revealFirstLetter])
 
+  const renderHintButton = (): JSX.Element => {
+    if (gameState !== GAME_STATE_INPROGRESS) {
+      return <span className='block h-12'>&nbsp;</span>
+    }
+
+    return (
+      <button
+        className='bg-yellow-300 h-12 w-12 m-1 rounded-md text-md font-semibold disabled:opacity-50'
+        disabled={revealFirstLetter}
+        onClick={() => setRevealFirstLetter(true)}
+      >
+        Hint
+      </button>
+    )
+  }
+
   return (
     <ol className='m-4'>
-      <li>
-        <button
-          className='bg-yellow-300 h-12 w-12 m-1 rounded-md text-md font-semibold disabled:opacity-50'
-          disabled={revealFirstLetter}
-          onClick={() => setRevealFirstLetter(true)}
-        >
-          Hint
-        </button>
-      </li>
+      <li>{renderHintButton()}</li>
       {guessesWithFiller.map((guess, guessIndex) => (
         <li key={guessIndex} className='grid grid-cols-5'>
           {guess.split('').map((letter: string, idx: number) => (

@@ -18,7 +18,7 @@ import {
 // @ts-expect-error no type definitions for third-party library :/
 import randomWords from '@genzou/random-words'
 
-type GameState =
+export type GameState =
   | typeof GAME_STATE_INPROGRESS
   | typeof GAME_STATE_LOSE
   | typeof GAME_STATE_WIN
@@ -92,7 +92,7 @@ const Home: NextPage = () => {
         )}
         {gameState === GAME_STATE_INPROGRESS && (
           <>
-            <Guesses guesses={guesses} answer={answer} />
+            <Guesses guesses={guesses} answer={answer} gameState={gameState} />
             <Form guesses={guesses} setGuesses={setGuesses} />
           </>
         )}
