@@ -41,7 +41,6 @@ const Home: NextPage = () => {
     lastGuess.split('').forEach((letter: string, idx: number) => {
       const previousStatus = letterStatuses[letter]
       const currentStatus = getLetterStatus(lastGuess, idx, answer)
-      console.log({ previousStatus, currentStatus })
       if (
         typeof previousStatus !== 'undefined' &&
         previousStatus.weighting >= currentStatus.weighting

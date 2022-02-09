@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import getLetterStatus from '../utils/getLetterStatus'
 import { GUESS_LIMIT } from '../config/consts'
 
@@ -6,15 +6,34 @@ export interface GuessesProps {
   guesses: string[]
   answer: string
 }
+
 const Guesses: React.FC<GuessesProps> = ({ guesses, answer }) => {
+  const [revealFirstLetter, setRevealFirstLetter] = useState(false)
+
   const guessesWithFiller = useMemo(() => {
-    const items = [...guesses, ...Array(GUESS_LIMIT).fill('     ')]
+    // don't show extra lines if last guess was correct
+    if (answer === guesses[guesses.length - 1]) return guesses
+
+    const items = [
+      ...guesses,
+      ...Array(GUESS_LIMIT).fill(`${revealFirstLetter ? answer[0] : ' '}    `)
+    ]
     items.length = GUESS_LIMIT
+
     return items
-  }, [guesses])
+  }, [answer, guesses, revealFirstLetter])
 
   return (
     <ol className='m-4'>
+      <li>
+        <button
+          className='bg-yellow-300 h-12 w-12 m-1 rounded-md text-md font-semibold disabled:opacity-50'
+          disabled={revealFirstLetter}
+          onClick={() => setRevealFirstLetter(true)}
+        >
+          Hint
+        </button>
+      </li>
       {guessesWithFiller.map((guess, guessIndex) => (
         <li key={guessIndex} className='grid grid-cols-5'>
           {guess.split('').map((letter: string, idx: number) => (

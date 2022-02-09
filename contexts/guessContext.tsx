@@ -30,7 +30,6 @@ const GuessContext = createContext<
 function guessReducer (state: State, action: Action): DefaultState {
   switch (action.type) {
     case 'SET_LETTERS':
-      console.log({ action })
       return {
         ...state,
         letters: { ...state.letters, ...action.payload }
