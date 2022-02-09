@@ -41,6 +41,7 @@ const Home: NextPage = () => {
     lastGuess.split('').forEach((letter: string, idx: number) => {
       const previousStatus = letterStatuses[letter]
       const currentStatus = getLetterStatus(lastGuess, idx, answer)
+      console.log({ previousStatus, currentStatus })
       if (
         typeof previousStatus !== 'undefined' &&
         previousStatus.weighting >= currentStatus.weighting
@@ -50,13 +51,13 @@ const Home: NextPage = () => {
       letterStatuses[letter] = currentStatus
     })
 
-    dispatch({ type: 'SET_LETTER', payload: letterStatuses })
+    dispatch({ type: 'SET_LETTERS', payload: letterStatuses })
   }, [answer, dispatch, guesses])
 
   return (
     <div className='wrapper w-screen h-screen overflow-auto bg-teal-100'>
       <Header />
-      <div className='max-w-screen-sm m-auto grid place-items-center'>
+      <div className='max-w-screen-sm m-auto grid place-items-center my-16'>
         <Description />
         {isWinner
           ? (

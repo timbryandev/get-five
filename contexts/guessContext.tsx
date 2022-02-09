@@ -17,7 +17,7 @@ const defaultState = {
 }
 
 export interface Action {
-  type: 'SET_LETTER' | 'RESET_LETTERS'
+  type: 'SET_LETTERS' | 'RESET_LETTERS'
   payload?: any
 }
 export type Dispatch = (action: Action) => void
@@ -29,10 +29,11 @@ const GuessContext = createContext<
 
 function guessReducer (state: State, action: Action): DefaultState {
   switch (action.type) {
-    case 'SET_LETTER':
+    case 'SET_LETTERS':
+      console.log({ action })
       return {
         ...state,
-        letters: { ...action.payload }
+        letters: { ...state.letters, ...action.payload }
       }
     case 'RESET_LETTERS':
       return {
