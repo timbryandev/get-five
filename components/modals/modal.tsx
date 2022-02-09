@@ -16,7 +16,7 @@ const Modal: React.FC<AboutProps> = ({ children, label, onClose = () => {}, titl
   }
 
   return (
-    <div className='bg-slate-800 bg-opacity-50 flex justify-center items-center absolute top-0 right-0 bottom-0 left-0'>
+    <div className='modal-background bg-slate-800 bg-opacity-50 flex justify-center items-center absolute top-0 right-0 bottom-0 left-0'>
       <div className='bg-white max-w-screen-sm m-auto m-3 p-5 rounded-md text-center '>
         <h2 className='text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-green-500 to-yellow-500'>
           {title}
