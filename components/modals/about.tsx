@@ -11,10 +11,15 @@ const AboutModal: React.FC = () => (
     </p>
     <p>
       View the project over at{' '}
-      <Anchor
-        href='https://github.com/timbryandev/get-five'
-      >
+      <Anchor href='https://github.com/timbryandev/get-five'>
         https://github.com/timbryandev/get-five
+      </Anchor>
+    </p>
+    <p>
+      If you&apos;d like to report a bug or request a new feature, please start
+      a `New issue` here:
+      <Anchor href='https://github.com/timbryandev/get-five/issues'>
+        https://github.com/timbryandev/get-five/issues
       </Anchor>
     </p>
   </Modal>
