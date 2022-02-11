@@ -67,7 +67,10 @@ const Home: NextPage = () => {
       return
     }
 
-    if (guesses.length >= GUESS_LIMIT && guesses[guesses.length - 1] !== answer) {
+    if (
+      guesses.length >= GUESS_LIMIT &&
+      guesses[guesses.length - 1] !== answer
+    ) {
       setGameState(GAME_STATE_LOSE)
       return
     }
@@ -81,12 +84,22 @@ const Home: NextPage = () => {
       <div className='max-w-screen-sm m-auto grid place-items-center my-16'>
         <Description />
         {gameState === GAME_STATE_WIN && (
-          <GameOver guesses={guesses} answer={answer} onContinue={resetGame}>
+          <GameOver
+            guesses={guesses}
+            answer={answer}
+            gameState={gameState}
+            onContinue={resetGame}
+          >
             <span className='text-green-500'>You win!</span>
           </GameOver>
         )}
         {gameState === GAME_STATE_LOSE && (
-          <GameOver guesses={guesses} answer={answer} onContinue={resetGame}>
+          <GameOver
+            guesses={guesses}
+            answer={answer}
+            gameState={gameState}
+            onContinue={resetGame}
+          >
             <span className='text-red-500'>You lose!</span>
           </GameOver>
         )}
