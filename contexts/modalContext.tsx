@@ -11,8 +11,8 @@ const defaultState = {
 }
 
 export interface Action {
-  type: 'SET_MODALS'
-  payload: DefaultState
+  type: 'RESET_MODALS' | 'SET_MODALS'
+  payload?: DefaultState
 }
 export type Dispatch = (action: Action) => void
 export type State = DefaultState
@@ -27,6 +27,10 @@ function modalReducer (state: State, action: Action): DefaultState {
       return {
         ...state,
         ...action.payload
+      }
+    case 'RESET_MODALS':
+      return {
+        ...defaultState
       }
   }
 }

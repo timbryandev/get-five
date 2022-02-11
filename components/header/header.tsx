@@ -22,7 +22,7 @@ const Header: React.FC = () => {
   }, [])
 
   return (
-    <header>
+    <header className='fixed top-0 left-0 right-0'>
       <nav className='bg-white shadow-lg'>
         <div className='max-w-screen-sm mx-auto px-4 relative'>
           <div>

@@ -4,6 +4,7 @@ export interface Letter {
   [key: string]: {
     color: string
     status: string
+    weighting: number
   }
 }
 
@@ -16,7 +17,7 @@ const defaultState = {
 }
 
 export interface Action {
-  type: 'SET_LETTER' | 'RESET_LETTERS'
+  type: 'SET_LETTERS' | 'RESET_LETTERS'
   payload?: any
 }
 export type Dispatch = (action: Action) => void
@@ -26,29 +27,12 @@ const GuessContext = createContext<
 { state: State, dispatch: Dispatch } | undefined
 >(undefined)
 
-function combineLetters (oldLetters: Letter, newLetters: Letter): Letter {
-  const combined = Object.entries(newLetters).reduce(
-    (acc, [key, val]) => {
-      const existingEntry = acc[key]
-      if (existingEntry !== undefined) {
-        if (existingEntry.status === 'correct' || val.status === 'incorrect') {
-          return acc
-        }
-      }
-      return { ...acc, [key]: val }
-    },
-    { ...oldLetters }
-  )
-
-  return combined
-}
-
 function guessReducer (state: State, action: Action): DefaultState {
   switch (action.type) {
-    case 'SET_LETTER':
+    case 'SET_LETTERS':
       return {
         ...state,
-        letters: { ...combineLetters(state.letters, action.payload) }
+        letters: { ...state.letters, ...action.payload }
       }
     case 'RESET_LETTERS':
       return {
