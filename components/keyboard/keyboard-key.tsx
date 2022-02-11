@@ -1,18 +1,16 @@
 const KeyboardKey = ({
   action,
-  colour,
-  disabled,
-  letter
+  letter,
+  styles = ''
 }: {
   action: (letter: string) => void
-  colour: string
-  disabled: boolean
   letter: string
+  styles: string
 }): JSX.Element => (
   <button
     key={`keyboard__key--${letter}`}
-    className={`keyboard__key flex-1 p-1 sm:m-1 border border-gray-400 rounded ${colour} ${
-      disabled ? 'bg-gray-300' : 'bg-white'
+    className={`keyboard__key flex-1 p-1 sm:m-1 border border-gray-400 rounded ${
+      styles.includes('bg-') ? styles : 'bg-white'
     }`}
     name={letter}
     onClick={evt => {

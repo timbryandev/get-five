@@ -1,6 +1,5 @@
 import KeyboardKey from './keyboard-key'
 import { useGuessContext } from '../../contexts/guessContext'
-import { STATUS_INCORRECT } from '../../config/consts'
 
 interface IKeyboardProps {
   onDeleteKey: () => void
@@ -8,10 +7,10 @@ interface IKeyboardProps {
   onKey: (letter: string) => void
 }
 
-const DELETE_LEFT_SYMBOL = '⌫'
 const CARRIAGE_RETURN_SYMBOL = '⏎'
+const DELETE_LEFT_SYMBOL = '⌫'
 
-const rows = [
+const KEY_ROWS = [
   ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
   ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
   [
@@ -58,18 +57,20 @@ const Keyboard = ({
 
   return (
     <div className='keyboard text-center mt-2 text-2xl'>
-      {rows.map((row, idx) => (
+      {KEY_ROWS.map((row, idx) => (
         <div key={`keyboard__row-${idx}`} className='keyboard__row flex'>
           {row.map((letter: string) => {
-            const isDisabled =
-              state.letters[letter]?.status === STATUS_INCORRECT
+            const styles =
+              typeof state.letters[letter]?.color === 'string'
+                ? state.letters[letter].color
+                : getStyles(letter)
+
             return (
               <KeyboardKey
                 key={letter}
                 letter={letter}
                 action={getAction(letter)}
-                colour={getStyles(letter)}
-                disabled={isDisabled}
+                styles={styles}
               />
             )
           })}
