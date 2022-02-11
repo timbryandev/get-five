@@ -45,7 +45,7 @@ const Keyboard = ({
     }
   }
 
-  const getColour = (letter: string): string => {
+  const getStyles = (letter: string): string => {
     switch (letter) {
       case DELETE_LEFT_SYMBOL:
         return 'text-yellow-500'
@@ -68,7 +68,7 @@ const Keyboard = ({
                 key={letter}
                 letter={letter}
                 action={getAction(letter)}
-                colour={getColour(letter)}
+                colour={getStyles(letter)}
                 disabled={isDisabled}
               />
             )

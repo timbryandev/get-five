@@ -15,7 +15,10 @@ const KeyboardKey = ({
       disabled ? 'bg-gray-300' : 'bg-white'
     }`}
     name={letter}
-    onClick={() => action(letter)}
+    onClick={evt => {
+      evt.preventDefault()
+      action(letter)
+    }}
   >
     {letter}
   </button>
