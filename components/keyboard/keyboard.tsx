@@ -15,7 +15,7 @@ const rows = [
   ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
   ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
   [
-    DELETE_LEFT_SYMBOL,
+    CARRIAGE_RETURN_SYMBOL,
     'z',
     'x',
     'c',
@@ -23,7 +23,7 @@ const rows = [
     'b',
     'n',
     'm',
-    CARRIAGE_RETURN_SYMBOL
+    DELETE_LEFT_SYMBOL
   ]
 ]
 
