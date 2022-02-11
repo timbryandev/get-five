@@ -12,17 +12,17 @@ const DELETE_LEFT_SYMBOL = '⌫'
 const CARRIAGE_RETURN_SYMBOL = '⏎'
 
 const rows = [
-  ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
-  ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+  ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+  ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
   [
     DELETE_LEFT_SYMBOL,
-    'Z',
-    'X',
-    'C',
-    'V',
-    'B',
-    'N',
-    'M',
+    'z',
+    'x',
+    'c',
+    'v',
+    'b',
+    'n',
+    'm',
     CARRIAGE_RETURN_SYMBOL
   ]
 ]
@@ -62,7 +62,7 @@ const Keyboard = ({
         <div key={`keyboard__row-${idx}`} className='keyboard__row flex'>
           {row.map((letter: string) => {
             const isDisabled =
-              state.letters[letter.toLowerCase()]?.status === STATUS_INCORRECT
+              state.letters[letter]?.status === STATUS_INCORRECT
             return (
               <KeyboardKey
                 key={letter}
