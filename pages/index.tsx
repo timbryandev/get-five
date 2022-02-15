@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { Letter, useGuessContext } from '../contexts/guessContext'
 import getLetterStatus from '../utils/getLetterStatus'
@@ -80,6 +81,10 @@ const Home: NextPage = () => {
 
   return (
     <div className='wrapper w-screen h-screen overflow-auto bg-teal-100'>
+      <Head>
+        <title>Get5 | TimBryan.dev</title>
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+      </Head>
       <Header />
       <div className='max-w-screen-sm m-auto grid place-items-center my-16'>
         <Description />
