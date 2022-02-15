@@ -14,7 +14,7 @@ function NavItem ({
   type
 }: NavItemProps): JSX.Element {
   const baseClass =
-    'inline-block w-full px-1 py-2 hover:bg-green-500 hover:text-white transition duration-300 rounded-md'
+    'inline-block w-full px-1 py-2 hover:bg-teal-300 transition duration-300 rounded-md'
 
   function renderCTA (): JSX.Element {
     if (type === 'button') {

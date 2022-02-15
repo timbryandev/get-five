@@ -51,7 +51,7 @@ const Guesses: React.FC<GuessesProps> = ({ answer, guesses, gameState }) => {
               key={idx}
               className={`${
                 getLetterStatus(guess, idx, answer).color
-              } h-12 w-12 text-2xl flex border-2 border-gray-300 p-1 m-1 box-border justify-center items-center`}
+              } h-12 w-12 text-2xl flex p-1 m-1 box-border justify-center items-center`}
             >
               {letter}
             </span>

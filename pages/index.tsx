@@ -80,9 +80,9 @@ const Home: NextPage = () => {
   }, [answer, guesses])
 
   return (
-    <div className='wrapper w-screen h-screen overflow-auto bg-teal-100'>
+    <div className='wrapper w-screen h-screen overflow-auto bg-gradient-to-r from-green-500 to-teal-500'>
       <Head>
-        <title>Get5 | TimBryan.dev</title>
+        <title>Get Five | TimBryan.dev</title>
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
       <Header />
@@ -95,7 +95,7 @@ const Home: NextPage = () => {
             gameState={gameState}
             onContinue={resetGame}
           >
-            <span className='text-green-500'>You win!</span>
+            <span>You win!</span>
           </GameOver>
         )}
         {gameState === GAME_STATE_LOSE && (
@@ -105,7 +105,7 @@ const Home: NextPage = () => {
             gameState={gameState}
             onContinue={resetGame}
           >
-            <span className='text-red-500'>You lose!</span>
+            <span>You lose!</span>
           </GameOver>
         )}
         {gameState === GAME_STATE_INPROGRESS && (

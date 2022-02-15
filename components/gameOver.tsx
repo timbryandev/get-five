@@ -24,7 +24,7 @@ const GameOver: React.FC<GameOverProps> = ({
           The answer was <span className='font-bold'>{answer}</span>
         </h2>
         <button
-          className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 transition duration-300'
+          className='bg-yellow-300 font-bold py-2 px-4 rounded mt-4 transition duration-300'
           onClick={() => onContinue()}
         >
           Play Again

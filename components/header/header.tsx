@@ -32,8 +32,8 @@ const Header: React.FC = () => {
                 <div>
                   {/* <!-- Website Logo --> */}
                   <a href='#' className='flex items-center py-4 px-2'>
-                    <h1 className='text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-green-500 to-yellow-500'>
-                      Get5
+                    <h1 className='text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-green-500 to-teal-500'>
+                      Get Five
                     </h1>
                   </a>
                 </div>
@@ -46,7 +46,7 @@ const Header: React.FC = () => {
                   aria-label='toggle navigation menu'
                 >
                   <svg
-                    className=' w-6 h-6 text-gray-500 hover:text-green-500 '
+                    className=' w-6 h-6 text-gray-500 hover:text-teal-500 '
                     x-show='!showMenu'
                     fill='none'
                     strokeLinecap='round'
