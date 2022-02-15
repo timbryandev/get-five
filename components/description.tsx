@@ -14,7 +14,7 @@ const Description: React.FC = () => {
         </li>
         <li>
           If a letter is not in the word, it will be{' '}
-          <span className='bg-gray-300 font-bold p-1 rounded'>gray</span>
+          <span className='bg-gray-300 font-bold p-1 rounded'>grey</span>
         </li>
       </ul>
     </div>
