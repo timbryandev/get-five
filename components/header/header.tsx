@@ -40,7 +40,11 @@ const Header: React.FC = () => {
               </div>
               {/* <!-- Mobile menu button --> */}
               <div className='flex items-center'>
-                <button ref={btnRef} className='outline-none mobile-menu-button'>
+                <button
+                  ref={btnRef}
+                  className='outline-none mobile-menu-button'
+                  aria-label='toggle navigation menu'
+                >
                   <svg
                     className=' w-6 h-6 text-gray-500 hover:text-green-500 '
                     x-show='!showMenu'
