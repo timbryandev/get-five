@@ -6,17 +6,6 @@ Production build can be played over at [https://get-five.timbryan.dev](https://g
 
 If you'd like to report a bug or request a new feature, please start a `New issue` here: [https://github.com/timbryandev/get-five/issues](https://github.com/timbryandev/get-five/issues)
 
-Things I'd like it to do:
-
-- [x] Use an API to give us as many random, varied words as possible
-- [x] Hint button to reveal first letter
-- [ ] Attempt history as a graph showing averages of how many guesses were needed to get a correct answer
-- [ ] Add timer for current game
-- [ ] Save best time and display as "Record:"
-- [ ] 4 and 6 letter modes
-- [ ] Map difficulty against best times and display respective time to current difficulty
-- [x] More fun, mobile-optimised styling
-
 ## prerequisites
 
 - node@14
