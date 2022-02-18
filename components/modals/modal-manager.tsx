@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
+
+import { useModalContext } from '../../contexts/modalContext'
 import AboutModal from './about'
 import CreditModal from './credits'
-import { useModalContext } from '../../contexts/modalContext'
 
 const ModalManager: React.FC = () => {
   const { state, dispatch } = useModalContext()

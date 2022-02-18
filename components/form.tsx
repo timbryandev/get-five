@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
-import Keyboard from './keyboard/keyboard'
+
 import cleanse from '../utils/cleansGuessString'
 import doesDeviceSupportTouchInput from '../utils/doesDeviceSupportTouchInput'
+import Keyboard from './keyboard/keyboard'
 
 export interface FormProps {
   guesses: string[]

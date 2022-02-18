@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
-import NavItem from './nav-item'
+
 import { useModalContext } from '../../contexts/modalContext'
+import NavItem from './nav-item'
 
 const Header: React.FC = () => {
   const { dispatch } = useModalContext()

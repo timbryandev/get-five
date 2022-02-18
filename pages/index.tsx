@@ -1,23 +1,23 @@
+// @ts-expect-error no type definitions for randomWords library :/
+import randomWords from '@genzou/random-words'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-import { Letter, useGuessContext } from '../contexts/guessContext'
-import getLetterStatus from '../utils/getLetterStatus'
-import ModalManager from '../components/modals/modal-manager'
+
 import Description from '../components/description'
 import Form from '../components/form'
 import GameOver from '../components/gameOver'
 import Guesses from '../components/guesses'
 import Header from '../components/header/header'
+import ModalManager from '../components/modals/modal-manager'
 import {
-  GUESS_LIMIT,
   GAME_STATE_INPROGRESS,
   GAME_STATE_LOSE,
-  GAME_STATE_WIN
+  GAME_STATE_WIN,
+  GUESS_LIMIT
 } from '../config/consts'
-
-// @ts-expect-error no type definitions for third-party library :/
-import randomWords from '@genzou/random-words'
+import { Letter, useGuessContext } from '../contexts/guessContext'
+import getLetterStatus from '../utils/getLetterStatus'
 
 export type GameState =
   | typeof GAME_STATE_INPROGRESS
@@ -83,7 +83,10 @@ const Home: NextPage = () => {
     <div className='wrapper w-screen h-screen overflow-auto bg-gradient-to-r from-green-500 to-teal-500'>
       <Head>
         <title>Get Five | TimBryan.dev</title>
-        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+        <meta
+          name='viewport'
+          content='initial-scale=1.0, width=device-width, user-scalable=no'
+        />
       </Head>
       <Header />
       <div className='max-w-screen-sm m-auto grid place-items-center my-16'>

@@ -1,5 +1,5 @@
-import KeyboardKey from './keyboard-key'
 import { useGuessContext } from '../../contexts/guessContext'
+import KeyboardKey from './keyboard-key'
 
 interface IKeyboardProps {
   onDeleteKey: () => void
