@@ -3,12 +3,14 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { Letter, useGuessContext } from '../contexts/guessContext'
 import getLetterStatus from '../utils/getLetterStatus'
-import ModalManager from '../components/modals/modal-manager'
 import Description from '../components/description'
 import Form from '../components/form'
 import GameOver from '../components/gameOver'
 import Guesses from '../components/guesses'
 import Header from '../components/header/header'
+import ModalManager from '../components/modals/modal-manager'
+import Timer from '../components/timer'
+
 import {
   GUESS_LIMIT,
   GAME_STATE_INPROGRESS,
@@ -110,6 +112,7 @@ const Home: NextPage = () => {
         )}
         {gameState === GAME_STATE_INPROGRESS && (
           <>
+            <Timer />
             <Guesses guesses={guesses} answer={answer} gameState={gameState} />
             <Form guesses={guesses} setGuesses={setGuesses} />
           </>
