@@ -3,6 +3,7 @@ import Guesses from './guesses'
 
 export interface GameOverProps {
   answer: string
+  children: React.ReactNode
   gameState: GameState
   guesses: string[]
   onContinue: () => void
@@ -14,7 +15,7 @@ const GameOver: React.FC<GameOverProps> = ({
   children,
   gameState,
   onContinue
-}) => {
+}: GameOverProps) => {
   return (
     <div className='grid place-items-center'>
       <div className='text-center'>

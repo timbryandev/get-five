@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react'
-import getLetterStatus from '../utils/getLetterStatus'
+
+import { GAME_STATE_INPROGRESS, GUESS_LIMIT } from '../config/consts'
 import { GameState } from '../pages/index'
-import { GUESS_LIMIT, GAME_STATE_INPROGRESS } from '../config/consts'
+import getLetterStatus from '../utils/getLetterStatus'
 
 export interface GuessesProps {
   answer: string
@@ -9,7 +10,7 @@ export interface GuessesProps {
   gameState: GameState
 }
 
-const Guesses: React.FC<GuessesProps> = ({ answer, guesses, gameState }) => {
+const Guesses: React.FC<GuessesProps> = ({ answer, guesses, gameState }: GuessesProps) => {
   const [revealFirstLetter, setRevealFirstLetter] = useState(false)
 
   const guessesWithFiller = useMemo(() => {

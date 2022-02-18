@@ -7,7 +7,7 @@ export interface AboutProps {
   title: string
 }
 
-const Modal: React.FC<AboutProps> = ({ children, label, onClose = () => {}, title }) => {
+const Modal: React.FC<AboutProps> = ({ children, label, onClose = () => {}, title }: AboutProps) => {
   const { dispatch } = useModalContext()
 
   const handleOnClose = (): void => {

@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
-import Keyboard from './keyboard/keyboard'
+
 import cleanse from '../utils/cleansGuessString'
 import doesDeviceSupportTouchInput from '../utils/doesDeviceSupportTouchInput'
+import Keyboard from './keyboard/keyboard'
 
 export interface FormProps {
   guesses: string[]
@@ -47,6 +48,8 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
       onSubmit={handleSubmit}
     >
       <input
+        autoCorrect='off'
+        autoComplete='off'
         ref={inputRef}
         className='w-full text-center p-2 text-3xl rounded'
         type='text'
