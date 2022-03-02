@@ -3,11 +3,13 @@ import { createContext, useContext, useReducer } from 'react'
 export interface DefaultState {
   about?: boolean
   credits?: boolean
+  gameplay?: boolean
 }
 
 const defaultState = {
   about: false,
-  credits: false
+  credits: false,
+  gameplay: false
 }
 
 export interface Action {

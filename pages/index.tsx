@@ -2,7 +2,6 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 
-import Description from '../components/description'
 import Form from '../components/form'
 import GameOver from '../components/gameOver'
 import Guesses from '../components/guesses'
@@ -84,7 +83,6 @@ const Home: NextPage = () => {
       </Head>
       <Header />
       <div className='max-w-screen-sm m-auto grid place-items-center my-16'>
-        <Description />
         {gameState === GAME_STATE_WIN && (
           <GameOver
             guesses={guesses}

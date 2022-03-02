@@ -1,12 +1,13 @@
 {
   "name": "get-five",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
+    "prebuild": "npm run generate-words",
     "build": "next build",
     "dev": "next dev",
     "generate-words": "node ./scripts/generate-word-lists/index.mjs",
     "lint": "eslint . --ext .js,.ts,.tsx --fix",
-    "prebuild": "npm run generate-words",
     "prepare": "husky install",
     "start": "next start"
   },

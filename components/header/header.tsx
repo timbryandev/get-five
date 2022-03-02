@@ -68,6 +68,14 @@ const Header: React.FC = () => {
               <NavItem
                 onClick={() => {
                   toggle()
+                  dispatch({ type: 'SET_MODALS', payload: { gameplay: true } })
+                }}
+                type='button'
+              >How to play
+              </NavItem>
+              <NavItem
+                onClick={() => {
+                  toggle()
                   dispatch({ type: 'SET_MODALS', payload: { about: true } })
                 }}
                 type='button'
