@@ -1,5 +1,3 @@
-// @ts-expect-error no type definitions for randomWords library :/
-import randomWords from '@genzou/random-words'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
@@ -18,25 +16,23 @@ import {
 } from '../config/consts'
 import { Letter, useGuessContext } from '../contexts/guessContext'
 import getLetterStatus from '../utils/getLetterStatus'
+import randomWord, { TDictionaries } from '../utils/randomWord'
 
 export type GameState =
   | typeof GAME_STATE_INPROGRESS
   | typeof GAME_STATE_LOSE
   | typeof GAME_STATE_WIN
 
-export const getAnswer = (): string => {
-  const words = randomWords({ exactly: 1, maxLength: 5, minLength: 5 })
-  return words[0]
-}
+export const getRandomWord = (dictionary = 'five'): string => randomWord(dictionary as TDictionaries)
 
 const Home: NextPage = () => {
   const { dispatch } = useGuessContext()
   const [guesses, setGuesses] = useState<string[]>([])
-  const [answer, setAnswer] = useState<string>(getAnswer())
+  const [answer, setAnswer] = useState<string>(getRandomWord())
   const [gameState, setGameState] = useState<GameState>(GAME_STATE_INPROGRESS)
 
   const resetGame = (): void => {
-    setAnswer(getAnswer())
+    setAnswer(getRandomWord())
     setGuesses([])
     dispatch({ type: 'RESET_LETTERS' })
   }
