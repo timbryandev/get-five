@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 
 import { useModalContext } from '../../contexts/modalContext'
 import AboutModal from './about'
+import Contact from './contact'
 import CreditModal from './credits'
 import GameplayModal from './gameplay'
 
@@ -27,9 +28,10 @@ const ModalManager: React.FC = () => {
 
   return (
     <>
-      {state.gameplay === true && <GameplayModal />}
       {state.about === true && <AboutModal />}
       {state.credits === true && <CreditModal />}
+      {state.contact === true && <Contact />}
+      {state.gameplay === true && <GameplayModal />}
     </>
   )
 }

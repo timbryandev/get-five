@@ -90,10 +90,12 @@ const Header: React.FC = () => {
               >Credits
               </NavItem>
               <NavItem
-                href='https://timbryan.dev/#contact'
-                type='link'
-              >
-                Get in touch
+                onClick={() => {
+                  toggle()
+                  dispatch({ type: 'SET_MODALS', payload: { contact: true } })
+                }}
+                type='button'
+              >Get in touch
               </NavItem>
             </ul>
           </div>
