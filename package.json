@@ -4,12 +4,13 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "lint": "eslint . --ext .ts,.tsx --fix",
+    "generate-words": "node ./scripts/generate-word-lists/index.mjs",
+    "lint": "eslint . --ext .js,.ts,.tsx --fix",
+    "prebuild": "npm run generate-words",
     "prepare": "husky install",
     "start": "next start"
   },
   "dependencies": {
-    "@genzou/random-words": "^1.1.2",
     "next": "^12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
