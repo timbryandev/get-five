@@ -16,14 +16,12 @@ import {
 } from '../config/consts'
 import { Letter, useGuessContext } from '../contexts/guessContext'
 import getLetterStatus from '../utils/getLetterStatus'
-import randomWord, { TDictionaries } from '../utils/randomWord'
+import getRandomWord from '../utils/getRandomWord'
 
 export type GameState =
   | typeof GAME_STATE_INPROGRESS
   | typeof GAME_STATE_LOSE
   | typeof GAME_STATE_WIN
-
-export const getRandomWord = (dictionary = 'five'): string => randomWord(dictionary as TDictionaries)
 
 const Home: NextPage = () => {
   const { dispatch } = useGuessContext()

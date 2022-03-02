@@ -1,24 +1,24 @@
-import MersenneTwister from './MersenneTwister.js'
+import getRandomNumber from './getRandomNumber'
 
-export type TDictionaries = 'four' | 'five' | 'six'
+export const DIC_FOUR = 'FOUR'
+export const DIC_FIVE = 'FIVE'
+export const DIC_SIX = 'SIX'
 
-const mt = new MersenneTwister()
+export type TDictionary = typeof DIC_FOUR | typeof DIC_FIVE | typeof DIC_SIX
 
-const generateRandomIntegerInRange = (min: number, max: number) =>
-  Math.floor(mt.random() * (max - min + 1)) + min
-
-function randomWord (dictionary: TDictionaries) {
+function randomWord (dictionary: TDictionary) {
   let words
+
   switch (dictionary) {
-    case 'four': {
+    case DIC_FOUR: {
       words = require('../config/words-four').default
       break
     }
-    case 'five': {
+    case DIC_FIVE: {
       words = require('../config/words-five').default
       break
     }
-    case 'six': {
+    case DIC_SIX: {
       words = require('../config/words-six').default
       break
     }
@@ -28,8 +28,8 @@ function randomWord (dictionary: TDictionaries) {
       )
   }
 
-  const randomInt = generateRandomIntegerInRange(0, words.length - 1)
+  const index = getRandomNumber(0, words.length - 1)
 
-  return words[randomInt]
+  return words[index]
 }
 export default randomWord
