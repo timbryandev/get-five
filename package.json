@@ -4,7 +4,9 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "lint": "eslint . --ext .ts,.tsx --fix",
+    "generate-words": "node ./scripts/generate-word-lists/index.mjs",
+    "lint": "eslint . --ext .js,.ts,.tsx --fix",
+    "prebuild": "npm run generate-words",
     "prepare": "husky install",
     "start": "next start"
   },
