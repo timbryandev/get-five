@@ -13,7 +13,7 @@ import {
   GAME_STATE_WIN,
   GUESS_LIMIT
 } from '../config/consts'
-import { Letter, useGuessContext } from '../contexts/guessContext'
+import { Letter, useGameContext } from '../contexts/gameContext'
 import getLetterStatus from '../utils/getLetterStatus'
 import getRandomWord from '../utils/getRandomWord'
 
@@ -23,7 +23,7 @@ export type GameState =
   | typeof GAME_STATE_WIN
 
 const Home: NextPage = () => {
-  const { dispatch } = useGuessContext()
+  const { dispatch } = useGameContext()
   const [guesses, setGuesses] = useState<string[]>([])
   const [answer, setAnswer] = useState<string>(getRandomWord())
   const [gameState, setGameState] = useState<GameState>(GAME_STATE_INPROGRESS)

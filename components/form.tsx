@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import cleanse from '../utils/cleansGuessString'
 import doesDeviceSupportTouchInput from '../utils/doesDeviceSupportTouchInput'
+import isValidGuess from '../utils/isValidGuess'
 import Keyboard from './keyboard/keyboard'
 
 export interface FormProps {
@@ -21,6 +22,9 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
     event?.preventDefault()
 
     if (guess.length !== 5) {
+      return
+    }
+    if (!isValidGuess()) {
       return
     }
 

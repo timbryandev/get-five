@@ -1,4 +1,4 @@
-import { useGuessContext } from '../../contexts/guessContext'
+import { useGameContext } from '../../contexts/gameContext'
 import KeyboardKey from './keyboard-key'
 
 interface IKeyboardProps {
@@ -31,7 +31,7 @@ const Keyboard = ({
   onEnterKey,
   onKey
 }: IKeyboardProps): JSX.Element => {
-  const { state } = useGuessContext()
+  const { state } = useGameContext()
 
   const getAction = (letter: string): ((letter: string) => void) => {
     switch (letter) {
