@@ -18,29 +18,47 @@ Things I'd like it to do:
 - [ ] Save best time and display as "Record:"
 - [ ] Map difficulty against best times and display respective time to current difficulty
 
-## prerequisites
+## Prerequisites
 
 - node@14
 - npm@6
 
-## installation
+## Installation
 
 ```bash
+# Clone the repo
 git clone https://github.com/timbryandev/get-five.git
+
+# Change directory to cloned repo folder
 cd get-five
+
+# Install javascript dependencies
 npm install
 ```
 
-## dev
+## Development
 
 ```bash
-npm run dev   # start local development environment
-npm run lint  # lint TypeScript and JavaScript files
+# Start local development environment
+npm run dev
+
+# Lint TypeScript and JavaScript files
+npm run lint
 ```
 
-## deploy
+## Deploy
 
 ```bash
-npm run build # build production assets
-npm run start # run production server
+# Build production assets
+npm run build
+
+# Run production server
+npm run start
+```
+
+## Misc scripts
+
+```bash
+# Build js dictionaries from `/scripts/generate-word-lists/words.js` into `/configs/words-[word length].js`
+npm run generate-words
 ```
