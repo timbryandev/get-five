@@ -1,4 +1,4 @@
-const cleanseGuessString = (guess: string): string =>
-  guess.replace(/[^a-zA-Z]/g, '').slice(0, 5).toLowerCase()
+const cleanseGuessString = (guess: string, max: number): string =>
+  guess.replace(/[^a-zA-Z]/g, '').slice(0, max).toLowerCase()
 
 export default cleanseGuessString

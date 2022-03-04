@@ -2,7 +2,7 @@ export const GAME_STATE_INPROGRESS = 'INPROGRESS'
 export const GAME_STATE_WIN = 'WIN'
 export const GAME_STATE_LOSE = 'LOSE'
 export const GUESS_LIMIT = 6
-export const GAME_MODES: Array<[label: string, value: number]> = [
+export const GAME_MODES_LABELS: Array<[label: string, value: number]> = [
   ['Four letter mode', 4],
   ['Standard', 5],
   ['Six letter mode', 6]

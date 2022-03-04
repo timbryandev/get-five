@@ -2,8 +2,8 @@ import Modal from './modal'
 
 const GameplayModal: React.FC = () => (
   <Modal label='gameplay' title='Gameplay'>
-    <p className='mt-5'>Guess the word by typing it in the input below.</p>
-    <p>You have 5 guesses.</p>
+    <p className='mt-5'>Guess the word by typing it in the input.</p>
+    <p>You have 6 attempts.</p>
     <ul className='list-disc pl-5 mt-4'>
       <li>
         <p className='mt-2'>

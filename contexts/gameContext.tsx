@@ -56,7 +56,8 @@ export function GameProvider ({
 }: {
   children: React.ReactNode
 }): JSX.Element {
-  const [state, dispatch] = useReducer<State, Action>({ ...defaultState }, gameReducer)
+  // @ts-ignore
+  const [state, dispatch] = useReducer(gameReducer, { ...defaultState })
 
   return (
     <GameContext.Provider value={{ state, dispatch }}>

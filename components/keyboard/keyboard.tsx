@@ -31,7 +31,7 @@ const Keyboard = ({
   onEnterKey,
   onKey
 }: IKeyboardProps): JSX.Element => {
-  const { state } = useGameContext()
+  const { state: gameState } = useGameContext()
 
   const getAction = (letter: string): ((letter: string) => void) => {
     switch (letter) {
@@ -61,8 +61,8 @@ const Keyboard = ({
         <div key={`keyboard__row-${idx}`} className='keyboard__row flex'>
           {row.map((letter: string) => {
             const styles =
-              typeof state.letters[letter]?.color === 'string'
-                ? state.letters[letter].color
+              typeof gameState.letters[letter]?.color === 'string'
+                ? gameState.letters[letter].color
                 : getStyles(letter)
 
             return (
