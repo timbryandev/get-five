@@ -14,7 +14,7 @@ export interface FormProps {
 const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [guess, setGuess] = useState<string>('')
-  const gameState = useGameContext()
+  const gameContext = useGameContext()
 
   const getInputValue = (): string => inputRef.current?.value ?? ''
 
@@ -23,7 +23,7 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
   ): void => {
     event?.preventDefault()
 
-    if (guess.length !== gameState.state.mode) {
+    if (guess.length !== gameContext.state.mode) {
       return
     }
     if (!isValidGuess()) {
@@ -35,7 +35,7 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
   }
 
   const onGuessChange = (letter: string): void => {
-    setGuess(cleanse(letter, gameState.state.mode))
+    setGuess(cleanse(letter, gameContext.state.mode))
   }
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
         onKeyUp={evt => {
           evt.key === 'Enter' && handleSubmit(null)
         }}
-        maxLength={gameState.state.mode}
+        maxLength={gameContext.state.mode}
         value={guess}
         placeholder='Enter your guess'
         required
