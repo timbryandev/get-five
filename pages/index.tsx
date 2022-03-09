@@ -13,7 +13,7 @@ import {
   GAME_STATE_WIN,
   MAX_GUESSES
 } from '../config/consts'
-import { Letter, useGameContext } from '../contexts/gameContext'
+import { Letters, useGameContext } from '../contexts/gameContext'
 import getLetterStatus from '../utils/getLetterStatus'
 import getRandomWord from '../utils/getRandomWord'
 import { mapIndexToDictionary } from '../utils/randomWord'
@@ -38,7 +38,7 @@ const Home: NextPage = () => {
   // Add a guess
   useEffect(() => {
     const lastGuess = [...guesses].pop() ?? ''
-    const letterStatuses: Letter = {}
+    const letterStatuses: Letters = {}
 
     lastGuess.split('').forEach((letter: string, idx: number) => {
       const previousStatus = letterStatuses[letter]

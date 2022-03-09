@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useReducer } from 'react'
 
 const KEY_STATE_STORAGE = 'game-context'
 
-export interface Letter {
+export interface Letters {
   [key: string]: {
     color: string
     status: string
@@ -13,7 +13,7 @@ export interface Letter {
 export type Mode = 4 | 5 | 6
 
 export interface State {
-  letters: Letter
+  letters: Letters
   mode: Mode
 }
 
@@ -26,7 +26,7 @@ export type Dispatch = (action: Action) => void
 
 const defaultState = {
   letters: {},
-  mode: 5
+  mode: 5 as Mode
 }
 
 export type GameModeOption = [label: string, value: Mode]
@@ -38,8 +38,8 @@ export const GAME_MODE_OPTIONS: GameModeOption[] = [
 ]
 
 const GameContext = createContext<
-  { state: State; dispatch: Dispatch } | undefined
->(undefined)
+  {state: State, dispatch: React.Dispatch<Action>}
+>({ state: defaultState, dispatch: () => {} })
 
 function gameReducer (state: State, action: Action): State {
   switch (action.type) {
@@ -56,7 +56,7 @@ function gameReducer (state: State, action: Action): State {
     case 'SET_LETTERS':
       return {
         ...state,
-        letters: { ...state.letters, ...action.payload }
+        letters: { ...state.letters, ...action.payload as Letters }
       }
     case 'SET_MODE':
       return {
@@ -71,7 +71,6 @@ export function GameProvider ({
 }: {
   children: React.ReactNode
 }): JSX.Element {
-  // @ts-ignore
   const [state, dispatch] = useReducer(gameReducer, { ...defaultState })
 
   useEffect(() => {
