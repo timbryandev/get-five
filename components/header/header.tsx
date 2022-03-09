@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useEffect, useRef } from 'react'
 
 import { useModalContext } from '../../contexts/modalContext'
@@ -8,6 +9,20 @@ const Header: React.FC = () => {
   const btnRef = useRef<HTMLButtonElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
 
+  const hide = (event: MouseEvent): void => {
+    const target = event.target as HTMLElement
+
+    if (menuRef.current === null || btnRef.current === null) {
+      return
+    }
+
+    const wasTargetOurToggleButton = target.closest('button') === btnRef.current
+    if (wasTargetOurToggleButton) {
+      return
+    }
+    menuRef.current.classList.add('hidden')
+  }
+
   const toggle = (): void => {
     if (menuRef.current === null) return
     menuRef.current.classList.toggle('hidden')
@@ -16,9 +31,13 @@ const Header: React.FC = () => {
   useEffect(() => {
     const button = btnRef.current
     if (button === null) return
+
     button.addEventListener('click', toggle, false)
+    window.addEventListener('click', hide, false)
+
     return () => {
       button.removeEventListener('click', toggle, false)
+      window.removeEventListener('click', hide, false)
     }
   }, [])
 
@@ -32,11 +51,13 @@ const Header: React.FC = () => {
               <div className='flex space-x-7'>
                 <div>
                   {/* <!-- Website Logo --> */}
-                  <a href='#' className='flex items-center py-4 px-2'>
-                    <h1 className='text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-green-500 to-teal-500'>
-                      Get Five
-                    </h1>
-                  </a>
+                  <Link href='/' passHref={true}>
+                    <span className='flex items-center py-4 px-2'>
+                      <h1 className='text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-green-500 to-teal-500'>
+                        Get Five
+                      </h1>
+                    </span>
+                  </Link>
                 </div>
               </div>
               {/* <!-- Mobile menu button --> */}
@@ -63,15 +84,22 @@ const Header: React.FC = () => {
             </div>
           </div>
           {/* <!-- mobile menu --> */}
-          <div ref={menuRef} className='hidden mobile-menu bg-white shadow-lg absolute right-0 p-4 pt-0'>
+          <div
+            ref={menuRef}
+            className='hidden mobile-menu bg-white shadow-lg absolute right-0 p-4 pt-0'
+          >
             <ul className='text-center'>
+              <NavItem href='/settings' type='link'>
+                Settings
+              </NavItem>
               <NavItem
                 onClick={() => {
                   toggle()
                   dispatch({ type: 'SET_MODALS', payload: { gameplay: true } })
                 }}
                 type='button'
-              >How to play
+              >
+                How to play
               </NavItem>
               <NavItem
                 onClick={() => {
@@ -79,7 +107,8 @@ const Header: React.FC = () => {
                   dispatch({ type: 'SET_MODALS', payload: { about: true } })
                 }}
                 type='button'
-              >About
+              >
+                About
               </NavItem>
               <NavItem
                 onClick={() => {
@@ -87,7 +116,8 @@ const Header: React.FC = () => {
                   dispatch({ type: 'SET_MODALS', payload: { credits: true } })
                 }}
                 type='button'
-              >Credits
+              >
+                Credits
               </NavItem>
               <NavItem
                 onClick={() => {
@@ -95,7 +125,8 @@ const Header: React.FC = () => {
                   dispatch({ type: 'SET_MODALS', payload: { contact: true } })
                 }}
                 type='button'
-              >Get in touch
+              >
+                Get in touch
               </NavItem>
             </ul>
           </div>

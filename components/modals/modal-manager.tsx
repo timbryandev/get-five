@@ -12,7 +12,7 @@ const ModalManager: React.FC = () => {
   useEffect(() => {
     const closeModalsOnBackgroundClick = (evt: Event): void => {
       const element = evt.target as HTMLElement
-      // using getAttribute to accommodate SVGs
+      // Using getAttribute to accommodate SVGs
       const className = element.getAttribute('class') ?? ''
 
       if (className.includes('modal-background')) {
