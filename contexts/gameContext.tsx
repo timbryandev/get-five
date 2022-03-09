@@ -8,9 +8,11 @@ export interface Letter {
   }
 }
 
+export type Mode = 4 | 5 | 6
+
 export interface State {
   letters: Letter
-  mode: 4 | 5 | 6
+  mode: Mode
 }
 
 export interface Action {
@@ -24,6 +26,14 @@ const defaultState = {
   letters: {},
   mode: 5
 }
+
+export type GameModeOption = [label: string, value: Mode]
+
+export const GAME_MODE_OPTIONS: GameModeOption[] = [
+  ['Four letter mode', 4],
+  ['Standard', 5],
+  ['Six letter mode', 6]
+]
 
 const GameContext = createContext<
   { state: State; dispatch: Dispatch } | undefined
