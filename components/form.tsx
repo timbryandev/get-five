@@ -13,6 +13,7 @@ export interface FormProps {
 
 const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
+  const [error, setError] = useState<string>('')
   const [guess, setGuess] = useState<string>('')
   const gameContext = useGameContext()
 
@@ -23,19 +24,26 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
   ): void => {
     event?.preventDefault()
 
-    if (guess.length !== gameContext.state.mode) {
-      return
-    }
-    if (!isValidGuess()) {
+    const { error, message } = isValidGuess(guess, gameContext.state.mode)
+    if (error) {
+      setError(message)
       return
     }
 
+    setError('')
     setGuesses([...guesses, guess])
     setGuess('')
   }
 
   const onGuessChange = (letter: string): void => {
     setGuess(cleanse(letter, gameContext.state.mode))
+  }
+
+  const renderError = () => {
+    if (!error) {
+      return <p>&nbsp;</p>
+    }
+    return <span className='bg-yellow-300 p-2 rounded'>{error}</span>
   }
 
   useEffect(() => {
@@ -53,6 +61,8 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
       className='w-full text-center p-2 ml-auto mr-auto '
       onSubmit={handleSubmit}
     >
+      <div className='m-4 mt-0'>{renderError()}</div>
+
       <input
         autoCorrect='off'
         autoComplete='off'
