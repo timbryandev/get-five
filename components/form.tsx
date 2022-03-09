@@ -29,7 +29,7 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
   }
 
   const onGuessChange = (letter: string): void => {
-    setGuess(cleanse(letter))
+    setGuess(cleanse(letter, 5))
   }
 
   useEffect(() => {
