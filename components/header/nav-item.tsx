@@ -29,7 +29,7 @@ function NavItem ({
 
     // If internal link, use Link
     if (href.startsWith('/')) {
-      return <span className={baseClass}><Link href={href}>{children}</Link></span>
+      return <Link href={href} passHref={true}><span className={baseClass}>{children}</span></Link>
     }
 
     // Default to anchor

@@ -9,6 +9,20 @@ const Header: React.FC = () => {
   const btnRef = useRef<HTMLButtonElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
 
+  const hide = (event: MouseEvent): void => {
+    const target = event.target as HTMLElement
+
+    if (menuRef.current === null || btnRef.current === null) {
+      return
+    }
+
+    const wasTargetOurToggleButton = target.closest('button') === btnRef.current
+    if (wasTargetOurToggleButton) {
+      return
+    }
+    menuRef.current.classList.add('hidden')
+  }
+
   const toggle = (): void => {
     if (menuRef.current === null) return
     menuRef.current.classList.toggle('hidden')
@@ -17,9 +31,13 @@ const Header: React.FC = () => {
   useEffect(() => {
     const button = btnRef.current
     if (button === null) return
+
     button.addEventListener('click', toggle, false)
+    window.addEventListener('click', hide, false)
+
     return () => {
       button.removeEventListener('click', toggle, false)
+      window.removeEventListener('click', hide, false)
     }
   }, [])
 
@@ -71,10 +89,7 @@ const Header: React.FC = () => {
             className='hidden mobile-menu bg-white shadow-lg absolute right-0 p-4 pt-0'
           >
             <ul className='text-center'>
-              <NavItem
-                href='/settings'
-                type='link'
-              >
+              <NavItem href='/settings' type='link'>
                 Settings
               </NavItem>
               <NavItem
