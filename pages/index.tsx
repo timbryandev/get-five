@@ -34,7 +34,7 @@ const Home: NextPage = () => {
     dispatch({ type: 'RESET_LETTERS' })
   }
 
-  // add a guess
+  // Add a guess
   useEffect(() => {
     const lastGuess = [...guesses].pop() ?? ''
     const letterStatuses: Letter = {}
@@ -54,7 +54,7 @@ const Home: NextPage = () => {
     dispatch({ type: 'SET_LETTERS', payload: letterStatuses })
   }, [answer, dispatch, guesses])
 
-  // calculate game state
+  // Calculate game state
   useEffect(() => {
     if (guesses[guesses.length - 1] === answer) {
       setGameState(GAME_STATE_WIN)
@@ -75,7 +75,7 @@ const Home: NextPage = () => {
   return (
     <div className='wrapper w-screen h-screen overflow-auto bg-gradient-to-r from-green-500 to-teal-500'>
       <Head>
-        <title>Get Five | TimBryan.dev</title>
+        <title>Get Five</title>
         <meta
           name='viewport'
           content='initial-scale=1.0, width=device-width, user-scalable=no'

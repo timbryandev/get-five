@@ -41,7 +41,7 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
   useEffect(() => {
     if (inputRef.current === null) return
 
-    // disable virtual keyboard on touchscreen devices - only use ours on mobile
+    // Disable virtual keyboard on touchscreen devices - only use ours on mobile
     if (doesDeviceSupportTouchInput()) {
       inputRef.current.setAttribute('readonly', 'true')
     }

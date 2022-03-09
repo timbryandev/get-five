@@ -14,7 +14,7 @@ const Guesses: React.FC<GuessesProps> = ({ answer, guesses, gameState }: Guesses
   const [revealFirstLetter, setRevealFirstLetter] = useState(false)
 
   const guessesWithFiller = useMemo(() => {
-    // don't show extra lines if last guess was correct
+    // Don't show extra lines if last guess was correct
     if (answer === guesses[guesses.length - 1]) return guesses
 
     const items = [

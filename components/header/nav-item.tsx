@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import Anchor from '../anchor'
 
 export interface NavItemProps {
@@ -25,7 +27,12 @@ function NavItem ({
       )
     }
 
-    // Default to link
+    // If internal link, use Link
+    if (href.startsWith('/')) {
+      return <span className={baseClass}><Link href={href}>{children}</Link></span>
+    }
+
+    // Default to anchor
     return <Anchor href={href}>{children}</Anchor>
   }
 
