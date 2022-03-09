@@ -1,6 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 
+import { ANCHOR_CLASSES } from '../components/anchor'
 import Header from '../components/header/header'
 import RadioGroup from '../components/radio-group'
 import {
@@ -28,6 +30,7 @@ const Settings: NextPage = () => {
       <Header />
       <div className='max-w-screen-sm m-auto grid place-items-center my-24'>
         <h2 className='text-2xl font-bold'>Settings</h2>
+        <span className={`${ANCHOR_CLASSES} mr-auto`}><Link href="/">← Back</Link></span>
         <section>
           <h3>Current game mode</h3>
           <RadioGroup

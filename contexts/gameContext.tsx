@@ -1,4 +1,6 @@
-import { createContext, useContext, useReducer } from 'react'
+import { createContext, useContext, useEffect, useReducer } from 'react'
+
+const KEY_STATE_STORAGE = 'game-context'
 
 export interface Letter {
   [key: string]: {
@@ -16,8 +18,8 @@ export interface State {
 }
 
 export interface Action {
-  type: 'RESET_LETTERS' | 'SET_LETTERS' | 'SET_MODE'
-  payload?: State['letters'] | State['mode']
+  type: 'INIT_STORED' | 'RESET_LETTERS' | 'SET_LETTERS' | 'SET_MODE'
+  payload?: State['letters'] | State['mode'] | any
 }
 
 export type Dispatch = (action: Action) => void
@@ -41,22 +43,25 @@ const GameContext = createContext<
 
 function gameReducer (state: State, action: Action): State {
   switch (action.type) {
+    case 'INIT_STORED':
+      return {
+        ...state,
+        ...action.payload
+      }
     case 'RESET_LETTERS':
       return {
         ...state,
         letters: { ...defaultState.letters }
       }
     case 'SET_LETTERS':
-      if (typeof action.payload !== 'object') return state
       return {
         ...state,
         letters: { ...state.letters, ...action.payload }
       }
     case 'SET_MODE':
-      if (typeof action.payload !== 'number') return state
       return {
         ...state,
-        mode: action.payload
+        mode: action.payload as Mode
       }
   }
 }
@@ -68,6 +73,22 @@ export function GameProvider ({
 }): JSX.Element {
   // @ts-ignore
   const [state, dispatch] = useReducer(gameReducer, { ...defaultState })
+
+  useEffect(() => {
+    const existingState = localStorage.getItem(KEY_STATE_STORAGE)
+    if (typeof existingState === 'string') {
+      dispatch({
+        type: 'INIT_STORED',
+        payload: JSON.parse(existingState)
+      })
+    }
+  }, [])
+
+  useEffect(() => {
+    if (state !== defaultState) {
+      localStorage.setItem(KEY_STATE_STORAGE, JSON.stringify(state))
+    }
+  }, [state])
 
   return (
     <GameContext.Provider value={{ state, dispatch }}>
