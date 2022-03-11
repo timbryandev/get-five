@@ -14,8 +14,11 @@ const KeyboardKey = ({
     }`}
     name={letter}
     onClick={evt => {
+      const target = evt.target as HTMLButtonElement
       evt.preventDefault()
       action(letter)
+      document.querySelector('.key-pop')?.classList.remove('key-pop')
+      target.classList.add('key-pop')
     }}
   >
     {letter}

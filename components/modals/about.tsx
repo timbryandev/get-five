@@ -1,8 +1,10 @@
+import packageJson from '../../package.json'
 import Anchor from '../anchor'
 import Modal from './modal'
 
 const AboutModal: React.FC = () => (
   <Modal label='about' title='About'>
+    <p className='mt-5'>App version: {packageJson.version}</p>
     <p className='mt-5'>
       Guess the 5 letter word with a mastermind codebreaking style game play
       with no play restrictions. To request new feature, see what&apos;s in the

@@ -6,29 +6,53 @@ Production build can be played over at [https://get-five.timbryan.dev](https://g
 
 If you'd like to report a bug or request a new feature, please start a `New issue` here: [https://github.com/timbryandev/get-five/issues](https://github.com/timbryandev/get-five/issues)
 
-## prerequisites
+Things I'd like it to do: moved to the project's [issues board](https://github.com/timbryandev/get-five/issues)
+
+## Prerequisites
 
 - node@14
 - npm@6
 
-## installation
+## Installation
 
 ```bash
+# Clone the repo
 git clone https://github.com/timbryandev/get-five.git
+
+# Change directory to cloned repo folder
 cd get-five
+
+# Install javascript dependencies
 npm install
 ```
 
-## dev
+## Development
 
 ```bash
-npm run dev   # start local development environment
-npm run lint  # lint TypeScript and JavaScript files
+# Start local development environment
+npm run dev
+
+# Lint TypeScript and JavaScript files
+npm run lint
+
+# Testing
+npm run test       # run tests as a one-off task, usually for CI/CD tasks
+npm run test:watch # run tests in watch mode to aid TDD of utils et al
 ```
 
-## deploy
+## Deploy
 
 ```bash
-npm run build # build production assets
-npm run start # run production server
+# Build production assets
+npm run build
+
+# Run production server
+npm run start
+```
+
+## Misc scripts
+
+```bash
+# Build js dictionaries from `/scripts/generate-word-lists/words.js` into `/configs/words-[word length].js`
+npm run generate-words
 ```

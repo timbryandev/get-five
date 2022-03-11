@@ -1,27 +1,36 @@
 import { createContext, useContext, useReducer } from 'react'
 
-export interface DefaultState {
+export interface IModalState {
+  about: boolean
+  credits: boolean
+  contact: boolean
+  gameplay: boolean
+}
+export interface IModalPayload {
   about?: boolean
   credits?: boolean
+  contact?: boolean
+  gameplay?: boolean
 }
 
 const defaultState = {
   about: false,
-  credits: false
+  credits: false,
+  contact: false,
+  gameplay: false
 }
 
-export interface Action {
+export interface IModalAction {
   type: 'RESET_MODALS' | 'SET_MODALS'
-  payload?: DefaultState
+  payload?: IModalPayload
 }
-export type Dispatch = (action: Action) => void
-export type State = DefaultState
+export type TModalDispatch = (action: IModalAction) => void
 
 const ModalContext = createContext<
-{ state: State, dispatch: Dispatch } | undefined
+{ state: IModalState, dispatch: TModalDispatch } | undefined
 >(undefined)
 
-function modalReducer (state: State, action: Action): DefaultState {
+function modalReducer (state: IModalState, action: IModalAction): IModalState {
   switch (action.type) {
     case 'SET_MODALS':
       return {
@@ -49,7 +58,7 @@ export function ModalProvider ({
   )
 }
 
-export function useModalContext (): { state: DefaultState, dispatch: Dispatch } {
+export function useModalContext (): { state: IModalState, dispatch: TModalDispatch } {
   const context = useContext(ModalContext)
 
   if (context == null) {

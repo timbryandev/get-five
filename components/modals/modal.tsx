@@ -1,13 +1,13 @@
 import { useModalContext } from '../../contexts/modalContext'
 
-export interface AboutProps {
+export interface IAboutProps {
   children: React.ReactNode
   label: string
   onClose?: () => void
   title: string
 }
 
-const Modal: React.FC<AboutProps> = ({ children, label, onClose = () => {}, title }: AboutProps) => {
+const Modal: React.FC<IAboutProps> = ({ children, label, onClose = () => {}, title }: IAboutProps) => {
   const { dispatch } = useModalContext()
 
   const handleOnClose = (): void => {

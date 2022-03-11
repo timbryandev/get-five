@@ -1,25 +1,25 @@
-import { GameState } from '../pages/index'
+import { TGameStatus } from '../pages/index'
 import Guesses from './guesses'
 
-export interface GameOverProps {
+export interface IGameOverProps {
   answer: string
   children: React.ReactNode
-  gameState: GameState
+  gameStatus: TGameStatus
   guesses: string[]
   onContinue: () => void
 }
 
-const GameOver: React.FC<GameOverProps> = ({
+const GameOver: React.FC<IGameOverProps> = ({
   answer,
   guesses,
   children,
-  gameState,
+  gameStatus,
   onContinue
-}: GameOverProps) => {
+}: IGameOverProps) => {
   return (
     <div className='grid place-items-center'>
       <div className='text-center'>
-        <Guesses guesses={guesses} answer={answer} gameState={gameState} />
+        <Guesses guesses={guesses} answer={answer} gameStatus={gameStatus} />
         <h1 className='text-4xl font-bold'>{children}</h1>
         <h2>
           The answer was <span className='font-bold'>{answer}</span>

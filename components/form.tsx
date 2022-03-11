@@ -1,17 +1,21 @@
 import { useEffect, useRef, useState } from 'react'
 
+import { useGameContext } from '../contexts/gameContext'
 import cleanse from '../utils/cleansGuessString'
 import doesDeviceSupportTouchInput from '../utils/doesDeviceSupportTouchInput'
+import isValidGuess from '../utils/isValidGuess'
 import Keyboard from './keyboard/keyboard'
 
-export interface FormProps {
+export interface IFormProps {
   guesses: string[]
   setGuesses: (guesses: string[]) => void
 }
 
-const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
+const Form: React.FC<IFormProps> = ({ guesses, setGuesses }: IFormProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
+  const [error, setError] = useState<string>('')
   const [guess, setGuess] = useState<string>('')
+  const gameContext = useGameContext()
 
   const getInputValue = (): string => inputRef.current?.value ?? ''
 
@@ -20,22 +24,32 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
   ): void => {
     event?.preventDefault()
 
-    if (guess.length !== 5) {
+    const { error, message } = isValidGuess(guess, gameContext.state.mode)
+    if (error) {
+      setError(message)
       return
     }
 
+    setError('')
     setGuesses([...guesses, guess])
     setGuess('')
   }
 
   const onGuessChange = (letter: string): void => {
-    setGuess(cleanse(letter))
+    setGuess(cleanse(letter, gameContext.state.mode))
+  }
+
+  const renderError = () => {
+    if (!error) {
+      return <p>&nbsp;</p>
+    }
+    return <span className='bg-yellow-300 p-2 rounded'>{error}</span>
   }
 
   useEffect(() => {
     if (inputRef.current === null) return
 
-    // disable virtual keyboard on touchscreen devices - only use ours on mobile
+    // Disable virtual keyboard on touchscreen devices - only use ours on mobile
     if (doesDeviceSupportTouchInput()) {
       inputRef.current.setAttribute('readonly', 'true')
     }
@@ -47,6 +61,8 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
       className='w-full text-center p-2 ml-auto mr-auto '
       onSubmit={handleSubmit}
     >
+      <div className='m-4 mt-0'>{renderError()}</div>
+
       <input
         autoCorrect='off'
         autoComplete='off'
@@ -57,7 +73,7 @@ const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
         onKeyUp={evt => {
           evt.key === 'Enter' && handleSubmit(null)
         }}
-        maxLength={5}
+        maxLength={gameContext.state.mode}
         value={guess}
         placeholder='Enter your guess'
         required

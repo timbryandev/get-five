@@ -1,6 +1,8 @@
+import Link from 'next/link'
+
 import Anchor from '../anchor'
 
-export interface NavItemProps {
+export interface INavItemProps {
   children: React.ReactNode
   href?: string
   onClick?: () => void
@@ -12,7 +14,7 @@ function NavItem ({
   href = '/',
   onClick,
   type
-}: NavItemProps): JSX.Element {
+}: INavItemProps): JSX.Element {
   const baseClass =
     'inline-block w-full px-1 py-2 hover:bg-teal-300 transition duration-300 rounded-md'
 
@@ -25,7 +27,12 @@ function NavItem ({
       )
     }
 
-    // Default to link
+    // If internal link, use Link
+    if (href.startsWith('/')) {
+      return <Link href={href} passHref={true}><span className={baseClass}>{children}</span></Link>
+    }
+
+    // Default to anchor
     return <Anchor href={href}>{children}</Anchor>
   }
 
