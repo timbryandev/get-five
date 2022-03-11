@@ -6,12 +6,12 @@ import doesDeviceSupportTouchInput from '../utils/doesDeviceSupportTouchInput'
 import isValidGuess from '../utils/isValidGuess'
 import Keyboard from './keyboard/keyboard'
 
-export interface FormProps {
+export interface IFormProps {
   guesses: string[]
   setGuesses: (guesses: string[]) => void
 }
 
-const Form: React.FC<FormProps> = ({ guesses, setGuesses }: FormProps) => {
+const Form: React.FC<IFormProps> = ({ guesses, setGuesses }: IFormProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [error, setError] = useState<string>('')
   const [guess, setGuess] = useState<string>('')

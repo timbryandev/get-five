@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useReducer } from 'react'
 
 const KEY_STATE_STORAGE = 'game-context'
 
-export interface Letters {
+export interface ILetters {
   [key: string]: {
     color: string
     status: string
@@ -10,38 +10,38 @@ export interface Letters {
   }
 }
 
-export type Mode = 4 | 5 | 6
+export type TGameMode = 4 | 5 | 6
 
-export interface State {
-  letters: Letters
-  mode: Mode
+export interface IGameState {
+  letters: ILetters
+  mode: TGameMode
 }
 
-export interface Action {
+export interface IGameAction {
   type: 'INIT_STORED' | 'RESET_LETTERS' | 'SET_LETTERS' | 'SET_MODE'
-  payload?: State['letters'] | State['mode'] | any
+  payload?: IGameState['letters'] | IGameState['mode'] | any
 }
 
-export type Dispatch = (action: Action) => void
+export type TGameDispatch = (action: IGameAction) => void
 
 const defaultState = {
   letters: {},
-  mode: 5 as Mode
+  mode: 5 as TGameMode
 }
 
-export type GameModeOption = [label: string, value: Mode]
+export type TGameModeOption = [label: string, value: TGameMode]
 
-export const GAME_MODE_OPTIONS: GameModeOption[] = [
+export const GAME_MODE_OPTIONS: TGameModeOption[] = [
   ['Four letter mode', 4],
   ['Standard', 5],
   ['Six letter mode', 6]
 ]
 
 const GameContext = createContext<
-  {state: State, dispatch: React.Dispatch<Action>}
+  {state: IGameState, dispatch: React.Dispatch<IGameAction>}
 >({ state: defaultState, dispatch: () => {} })
 
-function gameReducer (state: State, action: Action): State {
+function gameReducer (state: IGameState, action: IGameAction): IGameState {
   switch (action.type) {
     case 'INIT_STORED':
       return {
@@ -56,12 +56,12 @@ function gameReducer (state: State, action: Action): State {
     case 'SET_LETTERS':
       return {
         ...state,
-        letters: { ...state.letters, ...action.payload as Letters }
+        letters: { ...state.letters, ...action.payload as ILetters }
       }
     case 'SET_MODE':
       return {
         ...state,
-        mode: action.payload as Mode
+        mode: action.payload as TGameMode
       }
   }
 }
@@ -96,7 +96,7 @@ export function GameProvider ({
   )
 }
 
-export function useGameContext (): { state: State; dispatch: Dispatch } {
+export function useGameContext (): { state: IGameState; dispatch: TGameDispatch } {
   const context = useContext(GameContext)
 
   if (context == null) {

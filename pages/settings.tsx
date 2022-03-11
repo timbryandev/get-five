@@ -7,14 +7,14 @@ import Header from '../components/header/header'
 import RadioGroup from '../components/radio-group'
 import {
   GAME_MODE_OPTIONS,
-  Mode,
+  TGameMode,
   useGameContext
 } from '../contexts/gameContext'
 
 const Settings: NextPage = () => {
   const { state, dispatch } = useGameContext()
 
-  const setMode = (value: Mode) => {
+  const setMode = (value: TGameMode) => {
     dispatch({ type: 'SET_MODE', payload: value })
   }
 

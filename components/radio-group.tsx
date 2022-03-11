@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export interface RadioGroupProps {
+export interface IRadioGroupProps {
   defaultValue?: string | number
   name: string
   onChange: ({ label, value }: { label: string; value: any }) => void
@@ -12,7 +12,7 @@ const RadioGroup = ({
   name,
   onChange,
   options
-}: RadioGroupProps): JSX.Element => {
+}: IRadioGroupProps): JSX.Element => {
   const [state, setState] = useState<any>(defaultValue)
 
   const handleOnChange = (label: string, value: any) => {

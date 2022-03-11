@@ -2,13 +2,13 @@ import { useMemo, useState } from 'react'
 
 import { GAME_STATE_INPROGRESS, MAX_GUESSES } from '../config/consts'
 import { useGameContext } from '../contexts/gameContext'
-import { GameStatus } from '../pages/index'
+import { TGameStatus } from '../pages/index'
 import getLetterStatus from '../utils/getLetterStatus'
 
-export interface GuessesProps {
+export interface IGuessesProps {
   answer: string
   guesses: string[]
-  gameStatus: GameStatus
+  gameStatus: TGameStatus
 }
 
 function getGridClass (gridCount: number) {
@@ -24,11 +24,11 @@ function getGridClass (gridCount: number) {
   }
 }
 
-const Guesses: React.FC<GuessesProps> = ({
+const Guesses: React.FC<IGuessesProps> = ({
   answer,
   guesses,
   gameStatus
-}: GuessesProps) => {
+}: IGuessesProps) => {
   const [revealFirstLetter, setRevealFirstLetter] = useState(false)
   const { state: gameState } = useGameContext()
 

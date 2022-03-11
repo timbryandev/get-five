@@ -1,4 +1,4 @@
-export interface AnchorProps {
+export interface IAnchorProps {
   additionalClassNames?: string
   children: React.ReactNode
   href: string
@@ -15,7 +15,7 @@ const Anchor = ({
   href,
   customClasses = '',
   title = ''
-}: AnchorProps): JSX.Element => (
+}: IAnchorProps): JSX.Element => (
   <a
     href={href}
     target='_blank'

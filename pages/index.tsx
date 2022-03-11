@@ -13,12 +13,12 @@ import {
   GAME_STATE_WIN,
   MAX_GUESSES
 } from '../config/consts'
-import { Letters, useGameContext } from '../contexts/gameContext'
+import { ILetters, useGameContext } from '../contexts/gameContext'
 import getLetterStatus from '../utils/getLetterStatus'
 import getRandomWord from '../utils/getRandomWord'
 import { mapIndexToDictionary } from '../utils/randomWord'
 
-export type GameStatus =
+export type TGameStatus =
   | typeof GAME_STATE_INPROGRESS
   | typeof GAME_STATE_LOSE
   | typeof GAME_STATE_WIN
@@ -27,7 +27,7 @@ const Home: NextPage = () => {
   const { state: gameState, dispatch: gameDispatch } = useGameContext()
   const [guesses, setGuesses] = useState<string[]>([])
   const [answer, setAnswer] = useState<string>(getRandomWord())
-  const [gameStatus, setGameStatus] = useState<GameStatus>(GAME_STATE_INPROGRESS)
+  const [gameStatus, setGameStatus] = useState<TGameStatus>(GAME_STATE_INPROGRESS)
 
   const resetGame = useCallback((): void => {
     setAnswer(getRandomWord(mapIndexToDictionary(gameState.mode)))
@@ -38,7 +38,7 @@ const Home: NextPage = () => {
   // Add a guess
   useEffect(() => {
     const lastGuess = [...guesses].pop() ?? ''
-    const letterStatuses: Letters = {}
+    const letterStatuses: ILetters = {}
 
     lastGuess.split('').forEach((letter: string, idx: number) => {
       const previousStatus = letterStatuses[letter]
