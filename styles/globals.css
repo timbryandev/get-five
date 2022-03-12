@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* contain overscroll behaviour only in vertical direction to prevent "pull to fresh" on mobile */
+body {
+  overscroll-behavior-y: contain;
+}
+
 .key-pop {
   animation: key-pop .3s;
 }
