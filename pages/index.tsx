@@ -7,6 +7,7 @@ import GameOver from '../components/gameOver'
 import Guesses from '../components/guesses'
 import Header from '../components/header/header'
 import ModalManager from '../components/modals/modal-manager'
+import Timer from '../components/timer'
 import {
   GAME_STATE_INPROGRESS,
   GAME_STATE_LOSE,
@@ -52,7 +53,7 @@ const Home: NextPage = () => {
       letterStatuses[letter] = currentStatus
     })
 
-    gameDispatch({ type: 'SET_LETTERS', payload: letterStatuses })
+    gameDispatch({ type: 'ADD_LETTERS', payload: letterStatuses })
   }, [answer, gameDispatch, guesses])
 
   // Calculate game state
@@ -110,6 +111,7 @@ const Home: NextPage = () => {
         )}
         {gameStatus === GAME_STATE_INPROGRESS && (
           <>
+            <Timer />
             <Guesses guesses={guesses} answer={answer} gameStatus={gameStatus} />
             <Form guesses={guesses} setGuesses={setGuesses} />
           </>

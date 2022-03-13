@@ -12,21 +12,38 @@ export interface ILetters {
 
 export type TGameMode = 4 | 5 | 6
 
+export interface ITimer {
+  active: boolean
+  show: boolean
+  time: number
+}
+
 export interface IGameState {
   letters: ILetters
   mode: TGameMode
+  timer: ITimer
 }
 
 export interface IGameAction {
-  type: 'INIT_STORED' | 'RESET_LETTERS' | 'SET_LETTERS' | 'SET_MODE'
-  payload?: IGameState['letters'] | IGameState['mode'] | any
+  type:
+    | 'INIT_STORED'
+    | 'RESET_LETTERS'
+    | 'ADD_LETTERS'
+    | 'SET_MODE'
+    | 'SET_TIMER'
+  payload?: any
 }
 
 export type TGameDispatch = (action: IGameAction) => void
 
 const defaultState = {
-  letters: {},
-  mode: 5 as TGameMode
+  letters: {} as ILetters,
+  mode: 5 as TGameMode,
+  timer: {
+    active: false,
+    show: true,
+    time: 0
+  } as ITimer
 }
 
 export type TGameModeOption = [label: string, value: TGameMode]
@@ -37,31 +54,37 @@ export const GAME_MODE_OPTIONS: TGameModeOption[] = [
   ['Six letter mode', 6]
 ]
 
-const GameContext = createContext<
-  {state: IGameState, dispatch: React.Dispatch<IGameAction>}
->({ state: defaultState, dispatch: () => {} })
+const GameContext = createContext<{
+  state: IGameState
+  dispatch: React.Dispatch<IGameAction>
+}>({ state: defaultState, dispatch: () => {} })
 
 function gameReducer (state: IGameState, action: IGameAction): IGameState {
   switch (action.type) {
     case 'INIT_STORED':
       return {
         ...state,
-        ...action.payload
+        ...action.payload as IGameState
+      }
+    case 'ADD_LETTERS':
+      return {
+        ...state,
+        letters: { ...state.letters, ...(action.payload as ILetters) }
       }
     case 'RESET_LETTERS':
       return {
         ...state,
-        letters: { ...defaultState.letters }
-      }
-    case 'SET_LETTERS':
-      return {
-        ...state,
-        letters: { ...state.letters, ...action.payload as ILetters }
+        letters: { ...defaultState.letters as ILetters }
       }
     case 'SET_MODE':
       return {
         ...state,
         mode: action.payload as TGameMode
+      }
+    case 'SET_TIMER':
+      return {
+        ...state,
+        timer: { ...state.timer, ...action.payload as ITimer }
       }
   }
 }
@@ -96,7 +119,10 @@ export function GameProvider ({
   )
 }
 
-export function useGameContext (): { state: IGameState; dispatch: TGameDispatch } {
+export function useGameContext (): {
+  state: IGameState
+  dispatch: TGameDispatch
+  } {
   const context = useContext(GameContext)
 
   if (context == null) {
