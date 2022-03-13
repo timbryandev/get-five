@@ -5,13 +5,34 @@ import { useGameContext } from '../contexts/gameContext'
 const TIME_INCREMENT = 1000
 
 function StopWatch (): JSX.Element {
-  const { state: gameState } = useGameContext()
+  const { state: gameState, dispatch: gameDispatch } = useGameContext()
   const [isActive, setIsActive] = useState(false)
   const [time, setTime] = useState(0)
 
+  const handleStart = (): void => {
+    setIsActive(true)
+  }
+
+  const handlePauseResume = (): void => {
+    setIsActive(!isActive)
+    gameDispatch({
+      type: 'SET_TIMER',
+      payload: { active: !isActive }
+    })
+  }
+
+  const handleReset = (): void => {
+    setIsActive(false)
+    setTime(0)
+    gameDispatch({
+      type: 'SET_TIMER',
+      payload: { active: false, time: 0 }
+    })
+  }
+
+  // Update timer on interval
   useEffect(() => {
     let interval: number = 0
-
     if (isActive) {
       interval = window.setInterval(() => {
         setTime(time => time + TIME_INCREMENT)
@@ -25,20 +46,24 @@ function StopWatch (): JSX.Element {
     }
   }, [isActive])
 
-  const handleStart = (): void => {
+  // Update our shared state when local time changes
+  // Could be used for pausing current game state while navigating around?
+  useEffect(() => {
+    gameDispatch({
+      type: 'SET_TIMER',
+      payload: { time }
+    })
+  }, [gameDispatch, time])
+
+  useEffect(() => {
+    gameDispatch({
+      type: 'SET_TIMER',
+      payload: { active: true, time: 0 }
+    })
     setIsActive(true)
-  }
+  }, [gameDispatch])
 
-  const handlePauseResume = (): void => {
-    setIsActive(!isActive)
-  }
-
-  const handleReset = (): void => {
-    setIsActive(false)
-    setTime(0)
-  }
-
-  if (!gameState.showTimer) {
+  if (!gameState.timer.show) {
     return <></>
   }
 

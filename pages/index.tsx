@@ -53,7 +53,7 @@ const Home: NextPage = () => {
       letterStatuses[letter] = currentStatus
     })
 
-    gameDispatch({ type: 'SET_LETTERS', payload: letterStatuses })
+    gameDispatch({ type: 'ADD_LETTERS', payload: letterStatuses })
   }, [answer, gameDispatch, guesses])
 
   // Calculate game state

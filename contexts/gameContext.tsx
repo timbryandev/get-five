@@ -12,28 +12,38 @@ export interface ILetters {
 
 export type TGameMode = 4 | 5 | 6
 
+export interface ITimer {
+  active: boolean
+  show: boolean
+  time: number
+}
+
 export interface IGameState {
   letters: ILetters
   mode: TGameMode
-  showTimer: Boolean
+  timer: ITimer
 }
 
 export interface IGameAction {
   type:
     | 'INIT_STORED'
     | 'RESET_LETTERS'
-    | 'SET_LETTERS'
+    | 'ADD_LETTERS'
     | 'SET_MODE'
-    | 'SET_SHOW_TIMER'
-  payload?: IGameState['letters'] | IGameState['mode'] | IGameState['showTimer']
+    | 'SET_TIMER'
+  payload?: any
 }
 
 export type TGameDispatch = (action: IGameAction) => void
 
 const defaultState = {
-  letters: {},
+  letters: {} as ILetters,
   mode: 5 as TGameMode,
-  showTimer: false
+  timer: {
+    active: false,
+    show: true,
+    time: 0
+  } as ITimer
 }
 
 export type TGameModeOption = [label: string, value: TGameMode]
@@ -54,28 +64,27 @@ function gameReducer (state: IGameState, action: IGameAction): IGameState {
     case 'INIT_STORED':
       return {
         ...state,
-        // @ts-ignore
-        ...action.payload
+        ...action.payload as IGameState
+      }
+    case 'ADD_LETTERS':
+      return {
+        ...state,
+        letters: { ...state.letters, ...(action.payload as ILetters) }
       }
     case 'RESET_LETTERS':
       return {
         ...state,
-        letters: { ...defaultState.letters }
-      }
-    case 'SET_LETTERS':
-      return {
-        ...state,
-        letters: { ...state.letters, ...(action.payload as ILetters) }
+        letters: { ...defaultState.letters as ILetters }
       }
     case 'SET_MODE':
       return {
         ...state,
         mode: action.payload as TGameMode
       }
-    case 'SET_SHOW_TIMER':
+    case 'SET_TIMER':
       return {
         ...state,
-        showTimer: action.payload as IGameState['showTimer']
+        timer: { ...state.timer, ...action.payload as ITimer }
       }
   }
 }

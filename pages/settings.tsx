@@ -18,7 +18,7 @@ const Settings: NextPage = () => {
   }
 
   const setShowTimer = (value: String) => {
-    dispatch({ type: 'SET_SHOW_TIMER', payload: value === 'Yes' })
+    dispatch({ type: 'SET_TIMER', payload: { ...state.timer, show: value === 'Yes' } })
   }
 
   return (
@@ -48,7 +48,7 @@ const Settings: NextPage = () => {
         <section className='my-6'>
           <h3 className='text-xl font-bold'>Show timer</h3>
           <RadioGroup
-            defaultValue={state.showTimer ? 'Yes' : 'No'}
+            defaultValue={state.timer.show ? 'Yes' : 'No'}
             name='show-timer'
             onChange={({ value }) => setShowTimer(value)}
             options={[
