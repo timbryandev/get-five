@@ -1,30 +1,28 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import { useGameContext } from '../contexts/gameContext'
 
 const TIME_INCREMENT = 1000
 
 function StopWatch (): JSX.Element {
-  const { state: gameState, dispatch: gameDispatch } = useGameContext()
-  const [isActive, setIsActive] = useState(false)
-  const [time, setTime] = useState(0)
+  const { state, dispatch } = useGameContext()
 
   const handleStart = (): void => {
-    setIsActive(true)
+    dispatch({
+      type: 'SET_TIMER',
+      payload: { active: true }
+    })
   }
 
   const handlePauseResume = (): void => {
-    setIsActive(!isActive)
-    gameDispatch({
+    dispatch({
       type: 'SET_TIMER',
-      payload: { active: !isActive }
+      payload: { active: !state.timer.active }
     })
   }
 
   const handleReset = (): void => {
-    setIsActive(false)
-    setTime(0)
-    gameDispatch({
+    dispatch({
       type: 'SET_TIMER',
       payload: { active: false, time: 0 }
     })
@@ -33,9 +31,12 @@ function StopWatch (): JSX.Element {
   // Update timer on interval
   useEffect(() => {
     let interval: number = 0
-    if (isActive) {
+    if (state.timer.active) {
       interval = window.setInterval(() => {
-        setTime(time => time + TIME_INCREMENT)
+        dispatch({
+          type: 'SET_TIMER',
+          payload: { time: state.timer.time + TIME_INCREMENT }
+        })
       }, TIME_INCREMENT)
     } else {
       window.clearInterval(interval)
@@ -44,26 +45,16 @@ function StopWatch (): JSX.Element {
     return () => {
       window.clearInterval(interval)
     }
-  }, [isActive])
-
-  // Update our shared state when local time changes
-  // Could be used for pausing current game state while navigating around?
-  useEffect(() => {
-    gameDispatch({
-      type: 'SET_TIMER',
-      payload: { time }
-    })
-  }, [gameDispatch, time])
+  }, [state.timer, dispatch])
 
   useEffect(() => {
-    gameDispatch({
+    dispatch({
       type: 'SET_TIMER',
       payload: { active: true, time: 0 }
     })
-    setIsActive(true)
-  }, [gameDispatch])
+  }, [dispatch])
 
-  if (!gameState.timer.show) {
+  if (!state.timer.show) {
     return <></>
   }
 
@@ -71,14 +62,14 @@ function StopWatch (): JSX.Element {
     <div className='timer'>
       <div className='time'>
         <span className='digits'>
-          {`0${Math.floor((time / 60000) % 60)}`.slice(-2)}:
+          {`0${Math.floor((state.timer.time / 60000) % 60)}`.slice(-2)}:
         </span>
         <span className='digits'>
-          {`0${Math.floor((time / 1000) % 60)}`.slice(-2)}:
+          {`0${Math.floor((state.timer.time / 1000) % 60)}`.slice(-2)}:
         </span>
       </div>
       {/* Debugging CTAs and states */}
-      <p>active={isActive.toString()}</p>
+      <p>active={state.timer.active.toString()}</p>
       <button onClick={handleStart}>handleStart</button>
       <br />
       <button onClick={handlePauseResume}>handlePauseResume</button>
