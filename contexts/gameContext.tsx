@@ -15,18 +15,25 @@ export type TGameMode = 4 | 5 | 6
 export interface IGameState {
   letters: ILetters
   mode: TGameMode
+  showTimer: Boolean
 }
 
 export interface IGameAction {
-  type: 'INIT_STORED' | 'RESET_LETTERS' | 'SET_LETTERS' | 'SET_MODE'
-  payload?: IGameState['letters'] | IGameState['mode'] | any
+  type:
+    | 'INIT_STORED'
+    | 'RESET_LETTERS'
+    | 'SET_LETTERS'
+    | 'SET_MODE'
+    | 'SET_SHOW_TIMER'
+  payload?: IGameState['letters'] | IGameState['mode'] | IGameState['showTimer']
 }
 
 export type TGameDispatch = (action: IGameAction) => void
 
 const defaultState = {
   letters: {},
-  mode: 5 as TGameMode
+  mode: 5 as TGameMode,
+  showTimer: false
 }
 
 export type TGameModeOption = [label: string, value: TGameMode]
@@ -37,15 +44,17 @@ export const GAME_MODE_OPTIONS: TGameModeOption[] = [
   ['Six letter mode', 6]
 ]
 
-const GameContext = createContext<
-  {state: IGameState, dispatch: React.Dispatch<IGameAction>}
->({ state: defaultState, dispatch: () => {} })
+const GameContext = createContext<{
+  state: IGameState
+  dispatch: React.Dispatch<IGameAction>
+}>({ state: defaultState, dispatch: () => {} })
 
 function gameReducer (state: IGameState, action: IGameAction): IGameState {
   switch (action.type) {
     case 'INIT_STORED':
       return {
         ...state,
+        // @ts-ignore
         ...action.payload
       }
     case 'RESET_LETTERS':
@@ -56,12 +65,17 @@ function gameReducer (state: IGameState, action: IGameAction): IGameState {
     case 'SET_LETTERS':
       return {
         ...state,
-        letters: { ...state.letters, ...action.payload as ILetters }
+        letters: { ...state.letters, ...(action.payload as ILetters) }
       }
     case 'SET_MODE':
       return {
         ...state,
         mode: action.payload as TGameMode
+      }
+    case 'SET_SHOW_TIMER':
+      return {
+        ...state,
+        showTimer: action.payload as IGameState['showTimer']
       }
   }
 }
@@ -96,7 +110,10 @@ export function GameProvider ({
   )
 }
 
-export function useGameContext (): { state: IGameState; dispatch: TGameDispatch } {
+export function useGameContext (): {
+  state: IGameState
+  dispatch: TGameDispatch
+  } {
   const context = useContext(GameContext)
 
   if (context == null) {
