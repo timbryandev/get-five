@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react'
 
+import { useGameContext } from '../contexts/gameContext'
+
 const TIME_INCREMENT = 1000
 
 function StopWatch (): JSX.Element {
+  const { state: gameState } = useGameContext()
   const [isActive, setIsActive] = useState(false)
   const [isPaused, setIsPaused] = useState(true)
   const [time, setTime] = useState(0)
@@ -36,6 +39,10 @@ function StopWatch (): JSX.Element {
     setIsActive(false)
     setIsPaused(false)
     setTime(0)
+  }
+
+  if (!gameState.showTimer) {
+    return <></>
   }
 
   return (
