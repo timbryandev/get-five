@@ -7,13 +7,12 @@ const TIME_INCREMENT = 1000
 function StopWatch (): JSX.Element {
   const { state: gameState } = useGameContext()
   const [isActive, setIsActive] = useState(false)
-  const [isPaused, setIsPaused] = useState(true)
   const [time, setTime] = useState(0)
 
   useEffect(() => {
     let interval: number = 0
 
-    if (isActive && !isPaused) {
+    if (isActive) {
       interval = window.setInterval(() => {
         setTime(time => time + TIME_INCREMENT)
       }, TIME_INCREMENT)
@@ -24,20 +23,18 @@ function StopWatch (): JSX.Element {
     return () => {
       window.clearInterval(interval)
     }
-  }, [isActive, isPaused])
+  }, [isActive])
 
   const handleStart = (): void => {
     setIsActive(true)
-    setIsPaused(false)
   }
 
   const handlePauseResume = (): void => {
-    setIsPaused(!isPaused)
+    setIsActive(!isActive)
   }
 
   const handleReset = (): void => {
     setIsActive(false)
-    setIsPaused(false)
     setTime(0)
   }
 
@@ -57,7 +54,6 @@ function StopWatch (): JSX.Element {
       </div>
       {/* Debugging CTAs and states */}
       <p>active={isActive.toString()}</p>
-      <p>isPaused={isPaused.toString()}</p>
       <button onClick={handleStart}>handleStart</button>
       <br />
       <button onClick={handlePauseResume}>handlePauseResume</button>
