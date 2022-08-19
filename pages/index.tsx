@@ -27,7 +27,9 @@ const Home: NextPage = () => {
   const { state: gameState, dispatch: gameDispatch } = useGameContext()
   const [guesses, setGuesses] = useState<string[]>([])
   const [answer, setAnswer] = useState<string>(getRandomWord())
-  const [gameStatus, setGameStatus] = useState<TGameStatus>(GAME_STATE_INPROGRESS)
+  const [gameStatus, setGameStatus] = useState<TGameStatus>(
+    GAME_STATE_INPROGRESS
+  )
 
   const resetGame = useCallback((): void => {
     setAnswer(getRandomWord(mapIndexToDictionary(gameState.mode)))
@@ -110,12 +112,23 @@ const Home: NextPage = () => {
         )}
         {gameStatus === GAME_STATE_INPROGRESS && (
           <>
-            <Guesses guesses={guesses} answer={answer} gameStatus={gameStatus} />
+            <Guesses
+              guesses={guesses}
+              answer={answer}
+              gameStatus={gameStatus}
+            />
             <Form guesses={guesses} setGuesses={setGuesses} />
           </>
         )}
         <ModalManager />
       </div>
+
+      <p className='shadow-lg text-2xl font-extrabold text-green-500 flex-1 p-2 m-2 rounded bg-white inline'>
+        <a href='https://ko-fi.com/S6S5EHTC8'>Buy Tim a coffee ☕</a>
+      </p>
+
+      <p>&nbsp;</p>
+
     </div>
   )
 }
